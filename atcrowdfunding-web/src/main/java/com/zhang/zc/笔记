@@ -1,0 +1,23 @@
+一、json字符串
+
+    1、在js中：
+       function fun1(){
+         this.name="ss"
+       }这是方法也是对象,但这个对象限定为fun1
+
+    2、json：
+       var fun2={name:"zs",age:12,(对象的属性)
+             a:function(){} 对象的方法
+       }
+       这是json格式的对象 浏览器可以解析
+
+二、 js的作用域
+
+     function fun3(){
+        var a="zs"
+     }
+     fun3()
+     alert(a) (会报错，因为a没有定义) alert是Windows的方法
+     全局作用域 把var 去掉就可以le
+
+

@@ -94,13 +94,14 @@
            },
            type:"POST",
            dataType:"json",
-           before:function () {
+           beforeSend:function () {
                loadingIndex = layer.msg('处理中', {icon: 16});
                
            },
            success:function (data) {
+                layer.close(loadingIndex);
                if(data.success){
-                   window.location.href="main";
+                    window.location.href="main";
                }else {
                    layer.msg("账号或者密码错误", {time:2000, icon:5, shift:6}, function () {
 
