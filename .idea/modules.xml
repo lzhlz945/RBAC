@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/atcrowdfunding-commons/atcrowdfunding-commons.iml" filepath="$PROJECT_DIR$/atcrowdfunding-commons/atcrowdfunding-commons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/atcrowdfunding-manager/atcrowdfunding-manager.iml" filepath="$PROJECT_DIR$/atcrowdfunding-manager/atcrowdfunding-manager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/atcrowdfunding-parent/atcrowdfunding-parent.iml" filepath="$PROJECT_DIR$/atcrowdfunding-parent/atcrowdfunding-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/atcrowdfunding-portal/atcrowdfunding-portal.iml" filepath="$PROJECT_DIR$/atcrowdfunding-portal/atcrowdfunding-portal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/atcrowdfunding-web/atcrowdfunding-web.iml" filepath="$PROJECT_DIR$/atcrowdfunding-web/atcrowdfunding-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RBAC.iml" filepath="$PROJECT_DIR$/.idea/RBAC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-rbac/test-rbac.iml" filepath="$PROJECT_DIR$/test-rbac/test-rbac.iml" />
     </modules>
   </component>
 </project>
