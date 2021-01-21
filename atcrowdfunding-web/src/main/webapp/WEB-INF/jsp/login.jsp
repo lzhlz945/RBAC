@@ -37,11 +37,11 @@
     <form class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="inputSuccess4" placeholder="请输入登录账号" autofocus>
+            <input type="text" class="form-control" id="userAccount" name="userAccount" placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+            <input type="text" class="form-control" id="password" name="password" placeholder="请输入登录密码" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
@@ -67,14 +67,49 @@
 </div>
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="layer/layer.js"></script>
 <script>
     function dologin() {
-        var type = $(":selected").val();
-        if ( type == "user" ) {
-            window.location.href = "main.html";
-        } else {
-            window.location.href = "member.html";
-        }
+       var userAccount=$("#userAccount").val();
+       var password=$("#password").val();
+
+       if(userAccount == ""){
+           layer.msg("账号不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+               
+           });
+           return;
+       }  
+       if(password == ""){
+           layer.msg("密码不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+               
+           });
+           return;
+       }
+        var loadingIndex =null;
+       $.ajax({
+           url:"doLogin",
+           data:{
+               "userAccount":userAccount,
+               "password":password
+           },
+           type:"POST",
+           dataType:"json",
+           before:function () {
+               loadingIndex = layer.msg('处理中', {icon: 16});
+               
+           },
+           success:function (data) {
+               if(data.success){
+                   window.location.href="main";
+               }else {
+                   layer.msg("账号或者密码错误", {time:2000, icon:5, shift:6}, function () {
+
+                   });
+               }
+
+           }
+       })
+
     }
 </script>
 </body>

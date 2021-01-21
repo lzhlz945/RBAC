@@ -118,6 +118,11 @@
 
         <!-- ********其他****************************** -->
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+        </dependency>
         <!-- Ehcache二级缓存 -->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
