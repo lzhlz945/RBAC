@@ -6,10 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="test-rbac" />
+        <module name="atcrowdfunding-commons" />
+        <module name="atcrowdfunding-manager" />
+        <module name="atcrowdfunding-parent" />
+        <module name="atcrowdfunding-portal" />
+        <module name="atcrowdfunding-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="atcrowdfunding-commons" target="1.5" />
+      <module name="atcrowdfunding-manager" target="1.5" />
+      <module name="atcrowdfunding-parent" target="1.5" />
+      <module name="atcrowdfunding-portal" target="1.5" />
+      <module name="atcrowdfunding-web" target="1.8" />
       <module name="test-rbac" target="1.8" />
     </bytecodeTargetLevel>
   </component>
