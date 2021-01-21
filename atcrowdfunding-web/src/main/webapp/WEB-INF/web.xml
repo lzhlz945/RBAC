@@ -9,9 +9,9 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
-<!--  <listener>
-    <listener-class>com.zhang.zc.web.ServerStartupListener</listener-class>
-  </listener>-->
+  <listener>
+    <listener-class>com.zhang.zc.listenner.PathListenner</listener-class>
+  </listener>
 
   <filter>
     <filter-name>encoding</filter-name>

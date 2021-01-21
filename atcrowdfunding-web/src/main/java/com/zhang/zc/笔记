@@ -19,5 +19,28 @@
      fun3()
      alert(a) (会报错，因为a没有定义) alert是Windows的方法
      全局作用域 把var 去掉就可以le
+三、路径问题
+    前端/ 到端口号
+    后端/ 到端项目名
 
+    1、使用监听器 放在application中
 
+    2、使用一个页面
+      <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+      <%
+          String basePath = request.getScheme()
+                  + "://"
+                  + request.getServerName()
+                  + ":"
+                  + request.getServerPort()
+                  + request.getContextPath()
+                  + "/";
+          pageContext.setAttribute("basePath",basePath);
+      %>
+
+      <!--写base标签，永远固定相对路径跳转的结果-->
+      <base href="<%=basePath%>">
+      <link type="text/css" rel="stylesheet" href="static/css/style.css" >
+      <script type="text/javascript" src="static/jQuery/jquery-1.7.2.js"></script>
+
+     其他页面： <%@ include file="/xx/xx/xx/xx.jsp"/>
