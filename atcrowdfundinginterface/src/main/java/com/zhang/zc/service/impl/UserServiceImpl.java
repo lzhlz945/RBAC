@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 @Service
@@ -25,5 +26,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> pageQuery(Map<String,String> map) {
         return userMapper.pageQuery(map);
+    }
+
+    @Override
+    public int insert(User user) {
+        user.setPassword(user.getUserAccount());
+        int account=userMapper.insert(user);
+        return account;
     }
 }

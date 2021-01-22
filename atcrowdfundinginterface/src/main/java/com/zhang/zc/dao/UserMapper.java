@@ -10,4 +10,6 @@ public interface UserMapper {
     User query4login(User user);
 
     List<User> pageQuery(Map<String,String> map);
+
+    int insert(User user);
 }

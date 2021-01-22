@@ -16,5 +16,10 @@
                 and username like '%' #{username} '%'
             </if>
         </where>
+        order by id desc
     </select>
+
+    <insert id="insert">
+        insert into user(userAccount,,password,username,email) values (#{userAccount},,#{password},#{username},#{email})
+    </insert>
 </mapper>

@@ -55,4 +55,29 @@ public class UserController {
         return ajaxMessage;
 
     }
+
+    //跳转新增
+    @RequestMapping("/add")
+    public String add(){
+
+        return "user/add";
+    }
+
+    //新增
+
+    @RequestMapping("/insert")
+    @ResponseBody
+    public Object insert(User user){
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        int a=userService.insert(user);
+        if(a>0){
+            ajaxMessage.setSuccess(true);
+
+        }else {
+            ajaxMessage.setSuccess(false);
+        }
+
+        return ajaxMessage;
+
+    }
 }
