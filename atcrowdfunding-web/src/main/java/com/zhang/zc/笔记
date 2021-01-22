@@ -44,3 +44,38 @@
       <script type="text/javascript" src="static/jQuery/jquery-1.7.2.js"></script>
 
      其他页面： <%@ include file="/xx/xx/xx/xx.jsp"/>
+
+
+四、RBAC 权限
+
+    RBAC一共分为4个级别
+    1、 RBAC0 基础的权限控制
+    2、 RBAC1 在RBAC0的基础上添加了角色的继承功能，例如销售经理就应该继承销售员那么销售经理
+              就会拥有销售员的所有功能外加销售的经理的特殊功能
+    3、 RBAC2 在RBAC0的基础上添加了互斥的功能，例如一个员工拥有了会计的角色，那么它就不能再拥有
+              出纳的角色
+    4、 RBAC3 即拥有RBAC1也同时拥有RBAC2的功能
+    1、permission （权限表/许可表）
+       表结构
+       id    name            url               code  [ type   parentId   icon  ...]
+
+    2、role  角色表
+    表结构
+    id       name
+
+    3、 user   用户表
+
+    表结构
+    id     username     password
+
+    4、 role_permission  角色和权限的多对多关联表
+    表结构
+    id    role_id     permission_id
+
+    5、 user_role  用户和角色的多对多关联表
+
+    表结构
+    id     user_id     role_id
+    注意：这2张多对多的关联表不需要提供独立的增删改查，来维护表中的数据，在项目部署时必须
+          要将一些必须的数据初始化到数据库中，例如管理员用户与管理员角色的管理，以及管理员
+          角色和一些基础功能的关联
