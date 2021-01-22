@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/user")
 @Controller
@@ -33,11 +35,14 @@ public class UserController {
     @RequestMapping("/pages")
     @ResponseBody
     public Object pages(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
-                        @RequestParam(value = "pageSize",defaultValue = "2")Integer pageSize ){
+                        @RequestParam(value = "pageSize",defaultValue = "2")Integer pageSize,
+                        @RequestParam(value = "username")String username){
             AjaxMessage ajaxMessage = new AjaxMessage();
         try {
+            Map<String,String> map=new HashMap<String, String>();
+            map.put("username",username);
             PageHelper.startPage(pageNum,pageSize);
-            List<User> userList=userService.pageQuery();
+            List<User> userList=userService.pageQuery(map);
             PageInfo<User> pageInfo=new PageInfo<User>(userList,3);
             ajaxMessage.setSuccess(true);
             ajaxMessage.setData(pageInfo);

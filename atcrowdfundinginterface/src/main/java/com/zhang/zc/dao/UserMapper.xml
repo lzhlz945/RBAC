@@ -11,5 +11,10 @@
     <!--分页查询-->
     <select id="pageQuery" resultType="user">
         select * from user
+        <where>
+            <if test="username!=null and username != ''">
+                and username like '%' #{username} '%'
+            </if>
+        </where>
     </select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     //分页查询
     @Override
-    public List<User> pageQuery() {
-        return userMapper.pageQuery();
+    public List<User> pageQuery(Map<String,String> map) {
+        return userMapper.pageQuery(map);
     }
 }
