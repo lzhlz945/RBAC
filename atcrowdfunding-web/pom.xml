@@ -9,11 +9,11 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <parent>
+<!--  <parent>
     <groupId>com.zhang.zc</groupId>
     <artifactId>atcrowdfunding-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
+  </parent>-->
   <name>atcrowdfunding-web Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -44,11 +44,13 @@
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
-      <dependency>
+    <dependency>
       <groupId>com.zhang.zc</groupId>
-      <artifactId>atcrowdfunding-commons</artifactId>
+      <artifactId>atcrowdfunding-interface</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+
+
   </dependencies>
   <build>
     <resources>
@@ -67,17 +69,7 @@
         <filtering>false</filtering>
       </resource>
     </resources>
-    <plugins>
-      <!-- 编码和编译和JDK版本 -->
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
+
   </build>
 
 </project>

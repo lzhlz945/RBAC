@@ -8,11 +8,11 @@
     <artifactId>atcrowdfunding-portal</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <parent>
+<!--    <parent>
         <groupId>com.zhang.zc</groupId>
         <artifactId>atcrowdfunding-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-    </parent>
+    </parent>-->
     <dependencies>
 
         <dependency>

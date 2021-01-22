@@ -7,11 +7,7 @@
     <groupId>com.zhang.zc</groupId>
     <artifactId>atcrowdfunding-manager</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <parent>
-        <groupId>com.zhang.zc</groupId>
-        <artifactId>atcrowdfunding-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+
     <dependencies>
 
         <dependency>
@@ -19,6 +15,15 @@
             <artifactId>atcrowdfunding-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.zhang.zc</groupId>
+            <artifactId>atcrowdfunding-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+
+
     </dependencies>
 
 </project>

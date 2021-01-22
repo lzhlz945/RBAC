@@ -7,4 +7,9 @@
         select * from user where userAccount=#{userAccount} and password=#{password}
     </select>
 
+
+    <!--分页查询-->
+    <select id="pageQuery" resultType="user">
+        select * from user limit #{pageStart},#{pageSize}
+    </select>
 </mapper>
