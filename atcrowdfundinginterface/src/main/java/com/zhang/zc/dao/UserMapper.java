@@ -9,5 +9,5 @@ public interface UserMapper {
 
     User query4login(User user);
 
-    List<User> pageQuery(Map<String, Object> map);
+    List<User> pageQuery();
 }

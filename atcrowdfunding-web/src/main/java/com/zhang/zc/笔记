@@ -79,3 +79,30 @@
     注意：这2张多对多的关联表不需要提供独立的增删改查，来维护表中的数据，在项目部署时必须
           要将一些必须的数据初始化到数据库中，例如管理员用户与管理员角色的管理，以及管理员
           角色和一些基础功能的关联
+
+五、分页 使用ajax
+   1、返回的数据封装在公共的类中
+      private Object data;  把分页的类放在这个 公共类中
+
+   2、前端
+      用数据拼接完成
+      分页部分
+       if(pageNum >1){
+                          layer.close(loadingIndex);
+                          html2+='<li ><a href="#" onclick="pages('+1+')">首页</a></li>';
+                          html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
+                      }
+
+                          for (var i = 1; i <=result.data.pages ; i++) {
+                              if(i==pageNum){
+                              html2+='<li class="active"><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
+                              }else {
+                                  html2+='<li ><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
+                              }
+                          }
+
+                          if(pageNum != result.data.pages){
+                              layer.close(loadingIndex);
+                              html2+='<li ><a href="#" onclick="pages('+(pageNum+1)+')">下一页</a></li>';
+                              html2+='<li ><a href="#" onclick="pages('+result.data.pages+')">尾页</a></li>';
+                          }

@@ -19,7 +19,7 @@
       <module name="atcrowdfunding-parent" target="1.8" />
       <module name="atcrowdfunding-portal" target="1.5" />
       <module name="atcrowdfunding-web" target="1.8" />
-      <module name="atcrowdfundinginterface" target="1.5" />
+      <module name="atcrowdfundinginterface" target="6" />
       <module name="test-rbac" target="1.8" />
     </bytecodeTargetLevel>
   </component>

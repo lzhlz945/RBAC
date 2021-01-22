@@ -157,8 +157,21 @@
                                 <th width="100">操作</th>
                             </tr>
                             </thead>
-                            <tbody id="tBodyBtn">
-
+                            <tbody>
+                            <c:forEach items="${requestScope.pageInfo.list}" var="u" varStatus="s">
+                                <tr>
+                                    <td>${s.count}</td>
+                                    <td><input type="checkbox"></td>
+                                    <td>${u.userAccount}</td>
+                                    <td>${u.username}</td>
+                                    <td>${u.email}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
 
 
                             </tbody>
@@ -166,7 +179,31 @@
                             <tr >
                                 <td colspan="6" align="center">
                                     <ul class="pagination">
+                                        <c:if test="${requestScope.pageInfo.pageNum ne 1}">
+                                        <li ><a href="${Path_APP}/user/index?pageNumber=1">首页</a></li>
+                                        <li ><a href="${Path_APP}/user/index?pageNumber=${requestScope.pageInfo.pageNum-1}">上一页</a></li>
+                                        </c:if>
+                                        <c:forEach items="${requestScope.pageInfo.navigatepageNums}" var="navigatepageNums">
+                                            <c:if test="${requestScope.pageInfo.pageNum eq navigatepageNums}">
+                                            <li class="active"><a href="${Path_APP}/user/index?pageNumber=${navigatepageNums}">${navigatepageNums}</a></li>
 
+                                            </c:if>
+
+                                            <c:if test="${requestScope.pageInfo.pageNum ne navigatepageNums}">
+                                            <li ><a href="${Path_APP}/user/index?pageNumber=${navigatepageNums}">${navigatepageNums}</a></li>
+
+                                            </c:if>
+                                        </c:forEach>
+                                       <%-- <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>--%>
+                                        <c:if test="${requestScope.pageInfo.pageNum ne requestScope.pageInfo.pages}">
+
+                                            <li ><a href="${Path_APP}/user/index?pageNumber=${requestScope.pageInfo.pageNum+1}">下一页</a></li>
+                                            <li ><a href="${Path_APP}/user/index?pageNumber=${requestScope.pageInfo.pages}">末页</a></li>
+                                        </c:if>
                                     </ul>
                                 </td>
                             </tr>
@@ -180,10 +217,9 @@
     </div>
 </div>
 
-<script src="${Path_APP}/jquery/jquery-2.1.1.min.js"></script>
-<script src="${Path_APP}/bootstrap/js/bootstrap.min.js"></script>
-<script src="${Path_APP}/script/docs.min.js"></script>
-<script src="${Path_APP}/layer/layer.js"></script>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -196,81 +232,7 @@
                 }
             }
         });
-        pages(1);
-
     });
-    //分页信息
-    function pages(pageNum){
-
-        var loadingIndex=null;
-        $.ajax({
-            url:"${Path_APP}/user/pages",
-            type:"POST",
-            dataType:"json",
-            data:{
-                "pageNum":pageNum,
-                "pageSize":2
-            },
-            beforeSend:function () {
-                loadingIndex = layer.msg('加载中...', {icon: 16});
-            },
-            success:function (result) {
-                layer.close(loadingIndex);
-                if(result.success){
-                    var html1="";
-                    var html2="";
-                $.each(result.data.list,function (i,n) {
-                    html1+='<tr>';
-                    html1+='<td>'+i+'</td>';
-                    html1+='<td><input type="checkbox"></td>';
-                    html1+='   <td>'+n.userAccount+'</td>';
-                    html1+='   <td>'+n.username+'</td>';
-                    html1+='   <td>'+n.email+'</td>';
-                    html1+='    <td>';
-                    html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
-                    html1+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
-                    html1+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
-                    html1+='</td>';
-                    html1+='</tr>';
-
-                });
-                if(pageNum >1){
-                    layer.close(loadingIndex);
-                    html2+='<li ><a href="#" onclick="pages('+1+')">首页</a></li>';
-                    html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
-                }
-
-                    for (var i = 1; i <=result.data.pages ; i++) {
-                        if(i==pageNum){
-                        html2+='<li class="active"><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
-                        }else {
-                            html2+='<li ><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
-                        }
-                    }
-
-                    if(pageNum != result.data.pages){
-                        layer.close(loadingIndex);
-                        html2+='<li ><a href="#" onclick="pages('+(pageNum+1)+')">下一页</a></li>';
-                        html2+='<li ><a href="#" onclick="pages('+result.data.pages+')">尾页</a></li>';
-                    }
-
-                    $("#tBodyBtn").html(html1);
-                    $(".pagination").html(html2);
-
-                }else {
-                    layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
-                    });
-                }
-            },
-            error:function () {
-                layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
-                });
-            }
-
-        })
-
-
-    }
     $("tbody .btn-success").click(function(){
         window.location.href = "assignRole.html";
     });

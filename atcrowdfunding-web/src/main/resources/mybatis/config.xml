@@ -4,4 +4,8 @@
     <typeAliases>
         <package name="com.zhang.zc.bean"/>
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
 </configuration>

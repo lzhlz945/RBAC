@@ -10,6 +10,6 @@
 
     <!--分页查询-->
     <select id="pageQuery" resultType="user">
-        select * from user limit #{pageStart},#{pageSize}
+        select * from user
     </select>
 </mapper>
