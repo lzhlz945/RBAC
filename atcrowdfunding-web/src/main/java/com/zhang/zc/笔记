@@ -106,3 +106,46 @@
                               html2+='<li ><a href="#" onclick="pages('+(pageNum+1)+')">下一页</a></li>';
                               html2+='<li ><a href="#" onclick="pages('+result.data.pages+')">尾页</a></li>';
                           }
+
+
+六、新增修改
+
+    用onclick() 这个方法修改
+    验证账户change 输入框改变值失去焦点触发
+         $("#userAccount").change(function () {
+                var userAccount= $("#userAccount").val();
+                if(userAccount==""){
+                    layer.msg("登录账号不能为空", {time:2000, icon:5, shift:6}, function () {
+                    });
+                    return;
+                }
+                var loadingIndex =null;
+                $.ajax({
+                    url:"${Path_APP}/user/checkAccount",
+                    data:{"userAccount":userAccount},
+                    type:"get",
+                    beforeSend:function () {
+                        loadingIndex = layer.msg('加载中...', {icon: 16});
+                    },
+                    success:function (data) {
+                        layer.close(loadingIndex);
+                        if(data.success){
+                            layer.msg("账户已可以使用", {time:2000, icon:1, shift:1}, function () {
+                            });
+
+                        }else {
+                            layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
+                            });
+                        }
+                    },
+                    error:function () {
+                        layer.close(loadingIndex);
+                        layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
+                        });
+                    }
+
+                })
+            })
+
+七、全选反选、单个删除
+    新增全选反选$("#tBody").on("click",$("input[name=xz]"),function(){}，单条删除
