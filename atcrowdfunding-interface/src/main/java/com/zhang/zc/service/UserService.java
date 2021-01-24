@@ -11,4 +11,13 @@ public interface UserService {
     List<User> pageQuery(Map<String,String> map);
 
     int insert(User user);
+
+    User selectOne(Integer userId);
+
+    //检查账户是否重复
+    Boolean toCheckAccount(String userAccount);
+
+    //单条修改user
+    Boolean editUser(User user);
+
 }

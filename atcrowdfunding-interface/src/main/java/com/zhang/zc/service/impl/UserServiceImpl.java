@@ -34,4 +34,31 @@ public class UserServiceImpl implements UserService {
         int account=userMapper.insert(user);
         return account;
     }
+
+    //单个修改查询记录
+    @Override
+    public User selectOne(Integer userId) {
+        return userMapper.selectOne(userId);
+    }
+
+    @Override
+    public Boolean toCheckAccount(String userAccount) {
+       int count= userMapper.toCheckAccount(userAccount);
+       if(count<=0){
+           return true;
+       }else {
+           return false;
+       }
+    }
+
+    @Override
+    public Boolean editUser(User user) {
+        user.setPassword(user.getUserAccount());
+        int count=userMapper.editUser(user);
+        if(count>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

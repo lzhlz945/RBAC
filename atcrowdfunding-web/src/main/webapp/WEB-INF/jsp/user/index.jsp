@@ -28,7 +28,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 用户维护</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="${Path_APP}/user/index">众筹平台 - 用户维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -70,7 +70,7 @@
                         <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
                         <ul style="margin-top:10px;">
                             <li style="height:30px;">
-                                <a href="user.html" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+                                <a href="${Path_APP}/user/index" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
                             </li>
                             <li style="height:30px;">
                                 <a href="role.html"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -201,6 +201,9 @@
               pages(1)
         })
 
+
+
+
     });
     //分页信息
     function pages(pageNum){
@@ -232,7 +235,7 @@
                     html1+='   <td>'+n.email+'</td>';
                     html1+='    <td>';
                     html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
-                    html1+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
+                    html1+='<button type="button" onclick="goUpdatePage('+n.id+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
                     html1+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
                     html1+='</td>';
                     html1+='</tr>';
@@ -273,6 +276,12 @@
 
         })
 
+
+    }
+    //单个修改
+    function goUpdatePage(userId){
+        alert(userId)
+        window.location.href="${Path_APP}/user/toEdit?userId="+userId;
 
     }
     $("tbody .btn-success").click(function(){

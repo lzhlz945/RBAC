@@ -26,7 +26,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 用户维护</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="${Path_APP}/user/index">众筹平台 - 用户维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -68,7 +68,7 @@
                         <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
                         <ul style="margin-top:10px;">
                             <li style="height:30px;">
-                                <a href="user.html" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+                                <a href="${Path_APP}/user/index" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
                             </li>
                             <li style="height:30px;">
                                 <a href="role.html"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
@@ -199,48 +199,79 @@
             }
         });
 
+        $("#userAccount").blur(function () {
+            var userAccount= $("#userAccount").val();
+            if(userAccount==""){
+                layer.msg("登录账号不能为空", {time:2000, icon:5, shift:6}, function () {
+                });
+                return;
+            }
+            var loadingIndex =null;
+            $.ajax({
+                url:"${Path_APP}/user/checkAccount",
+                data:{"userAccount":userAccount},
+                type:"get",
+                beforeSend:function () {
+                    loadingIndex = layer.msg('加载中...', {icon: 16});
+                },
+                success:function (data) {
+                    layer.close(loadingIndex);
+                    if(data.success){
+                        layer.msg("账户已可以使用", {time:2000, icon:1, shift:1}, function () {
+                        });
+                    }else {
+                        layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
+                        });
+                    }
+                },
+                error:function () {
+                    layer.close(loadingIndex);
+                    layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
+                    });
+                }
+
+            })
+
+        })
+
      $("#updateBtn").click(function () {
-
-         var userAccount= $("#userAccount").val();
-         if(userAccount==""){
-             layer.msg("登录账号不能为空", {time:2000, icon:5, shift:6}, function () {
-             });
-             return;
-         }
-         var loadingIndex =null;
-         alert(123)
-         $.ajax({
-             url:"${Path_APP}/user/insert",
-             data:{
-                 "userAccount":userAccount,
-                 "username":$.trim($("#username").val()),
-                 "email":$.trim($("#email").val())
-             },
-             type:"POST",
-             beforeSend:function () {
-                 loadingIndex = layer.msg('加载中...', {icon: 16});
-             },
-             success:function (data) {
-                 layer.close(loadingIndex);
-                 if(data.success){
-                     window.location.href="${Path_APP}/user/index";
-                 }else {
-                     layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
-                     });
-                 }
-             }
-
-         })
-
-
+         toAdd()
      })
+
      $("#reset").click(function () {
          $("#username").val("")
          $("#email").val("")
          $("#userAccount").val("")
-         // $("#formBtn1")[0].reset()
+         // $("#formBtn1")[0].reset();
      })
     });
+    function toAdd() {
+        var loadingIndex =null;
+
+        $.ajax({
+            url:"${Path_APP}/user/insert",
+            data:{
+                "userAccount":$.trim($("#userAccount").val()),
+                "username":$.trim($("#username").val()),
+                "email":$.trim($("#email").val())
+            },
+            type:"POST",
+            beforeSend:function () {
+                loadingIndex = layer.msg('加载中...', {icon: 16});
+            },
+            success:function (data) {
+                layer.close(loadingIndex);
+                if(data.success){
+                    window.location.href="${Path_APP}/user/index";
+                }else {
+                    layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
+                    });
+                }
+            }
+
+        })
+
+    }
 </script>
 </body>
 </html>

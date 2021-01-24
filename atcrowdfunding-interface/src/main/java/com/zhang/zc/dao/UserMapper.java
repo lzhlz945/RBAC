@@ -12,4 +12,10 @@ public interface UserMapper {
     List<User> pageQuery(Map<String,String> map);
 
     int insert(User user);
+
+    User selectOne(Integer userId);
+
+    int toCheckAccount(String userAccount);
+
+    int editUser(User user);
 }

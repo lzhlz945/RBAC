@@ -95,7 +95,7 @@
             <element id="module-output" name="atcrowdfunding-portal" />
           </element>
           <element id="archive" name="atcrowdfunding-interface-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="atcrowdfundinginterface" />
+            <element id="module-output" name="atcrowdfunding-interface" />
           </element>
         </element>
       </element>

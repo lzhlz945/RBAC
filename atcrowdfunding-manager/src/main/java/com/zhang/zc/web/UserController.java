@@ -8,10 +8,12 @@ import com.zhang.zc.bean.User;
 import com.zhang.zc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.ws.RequestWrapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,4 +82,45 @@ public class UserController {
         return ajaxMessage;
 
     }
+
+    //跳转至单个修改
+    @RequestMapping("/toEdit")
+    public String toEdit(String userId, Model model){
+        Integer integer = Integer.valueOf(userId);
+        User user=  userService.selectOne(integer);
+        model.addAttribute("user1",user);
+        return "user/edit";
+    }
+
+    //修改前检查账户
+    @RequestMapping("/checkAccount")
+    @ResponseBody
+    public Object checkAccount(String userAccount){
+
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        Boolean flag=userService.toCheckAccount(userAccount);
+        if(flag){
+            ajaxMessage.setSuccess(true);
+        }else {
+            ajaxMessage.setSuccess(false);
+        }
+        return ajaxMessage;
+
+    }
+
+    //单个修改
+    @RequestMapping("/editUser")
+    @ResponseBody
+    public Object editUser(User user){
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        Boolean flag=userService.editUser(user);
+        if(flag){
+            ajaxMessage.setSuccess(true);
+        }else {
+             ajaxMessage.setSuccess(false);
+        }
+        return ajaxMessage;
+
+    }
+
 }
