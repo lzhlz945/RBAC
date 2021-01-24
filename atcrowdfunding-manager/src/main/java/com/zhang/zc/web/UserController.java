@@ -123,4 +123,15 @@ public class UserController {
 
     }
 
+    //单条删除
+    @RequestMapping("/deleteByOne")
+    public String deleteByOne(String id){
+        try {
+            userService.deleteByOne(Integer.valueOf(id));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/user/index";
+    }
+
 }

@@ -18,4 +18,6 @@ public interface UserMapper {
     int toCheckAccount(String userAccount);
 
     int editUser(User user);
+
+    void deleteByOne(Integer id);
 }

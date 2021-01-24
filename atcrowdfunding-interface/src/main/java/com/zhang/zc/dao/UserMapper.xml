@@ -35,4 +35,8 @@
         update  user set userAccount=#{userAccount},username=#{username},password=#{password},email=#{email}
         where id=#{id}
     </update>
+
+    <delete id="deleteByOne">
+        delete from user where id=#{id}
+    </delete>
 </mapper>

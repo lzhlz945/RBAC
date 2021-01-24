@@ -20,4 +20,6 @@ public interface UserService {
     //单条修改user
     Boolean editUser(User user);
 
+    //单条删除
+    void deleteByOne(Integer valueOf);
 }

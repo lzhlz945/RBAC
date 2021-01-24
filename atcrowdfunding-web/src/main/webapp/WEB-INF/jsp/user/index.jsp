@@ -150,7 +150,7 @@
                             <thead>
                             <tr >
                                 <th width="30">#</th>
-                                <th width="30"><input type="checkbox"></th>
+                                <th width="30"><input type="checkbox" id="qx"></th>
                                 <th>账号</th>
                                 <th>名称</th>
                                 <th>邮箱地址</th>
@@ -196,6 +196,17 @@
                 }
             }
         });
+        //全选：
+        $("#qx").click(function () {
+
+            $("input[name=xz]").prop("checked",this.checked)
+        })
+
+        //反选
+        $("#tBodyBtn").on("click",$("input[name=xz]"),function () {
+            $("#qx").prop("checked",$("input[name=xz]").length==$("input[name=xz]:checked").length)
+        })
+
         pages(1);
         $("#queryBtn").click(function () {
               pages(1)
@@ -229,14 +240,14 @@
                 $.each(result.data.list,function (i,n) {
                     html1+='<tr>';
                     html1+='<td>'+i+'</td>';
-                    html1+='<td><input type="checkbox"></td>';
+                    html1+='<td><input type="checkbox" name="xz" value="'+n.id+'"></td>';
                     html1+='   <td>'+n.userAccount+'</td>';
                     html1+='   <td>'+n.username+'</td>';
                     html1+='   <td>'+n.email+'</td>';
                     html1+='    <td>';
                     html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
                     html1+='<button type="button" onclick="goUpdatePage('+n.id+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
-                    html1+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
+                    html1+='<button type="button" onclick="deleteFun1('+n.id+')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
                     html1+='</td>';
                     html1+='</tr>';
 
@@ -282,6 +293,16 @@
     function goUpdatePage(userId){
         alert(userId)
         window.location.href="${Path_APP}/user/toEdit?userId="+userId;
+
+    }
+
+    //单个按钮删除
+    function deleteFun1(id){
+        if(confirm("确定删除这条记录吗")){
+
+            window.location.href="${Path_APP}/user/deleteByOne?id="+id;
+            loadingIndex = layer.msg('加载中...', {icon: 16});
+        }
 
     }
     $("tbody .btn-success").click(function(){
