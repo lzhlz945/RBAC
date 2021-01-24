@@ -141,7 +141,7 @@
                         </div>
                         <button type="button" id="queryBtn" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+                    <button type="button" id="deleteBtn" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${Path_APP}/user/add'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
@@ -207,6 +207,50 @@
             $("#qx").prop("checked",$("input[name=xz]").length==$("input[name=xz]:checked").length)
         })
 
+        //批量删除
+        $("#deleteBtn").click(function () {
+            var $xz=$("input[name=xz]:checked");
+            if($xz.length<=0){
+                layer.msg("请选择一条记录！", {time:2000, icon:5, shift:6}, function () {
+                });
+            }else {
+                var params="";
+                for (var i = 0; i <$xz.length ; i++) {
+                    params+="ids="+$($xz[i]).val();
+                    if(i <$xz.length-1){
+                        params+="&"
+                    }
+                }
+                var loadingIndex=null;
+                alert(params)
+                $.ajax({
+                    url:"${Path_APP}/user/deleteBach",
+                    type:"POST",
+                    dataType:"json",
+                    data:params,
+                    beforeSend:function () {
+                        loadingIndex = layer.msg('加载中...', {icon: 16});
+                    },
+                    success:function (data) {
+                        layer.close(loadingIndex);
+                        if(data.success){
+                            layer.msg("成功删除："+data.count+"条记录", {time:2000, icon:1, shift:1}, function () {
+                            });
+                            window.setInterval("pages(1)",2000);
+                            loadingIndex = layer.msg('加载中...', {icon: 16});
+
+
+                        }else {
+                            layer.msg("删除失败！！！", {time:2000, icon:5, shift:6}, function () {
+                            });
+                        }
+
+                    }
+
+                })
+            }
+        })
+
         pages(1);
         $("#queryBtn").click(function () {
               pages(1)
@@ -226,7 +270,7 @@
             dataType:"json",
             data:{
                 "pageNum":pageNum,
-                "pageSize":2,
+                "pageSize":8,
                 "username":$.trim($("#textInput").val())
             },
             beforeSend:function () {
@@ -258,13 +302,27 @@
                     html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
                 }
 
-                    for (var i = 1; i <=result.data.pages ; i++) {
-                        if(i==pageNum){
-                        html2+='<li class="active"><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
-                        }else {
-                            html2+='<li ><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
-                        }
+                  var len=result.data.navigatepageNums.length;
+                    for(var j = 0; j < len; j++) {
+
+                            if(result.data.navigatepageNums[j]==pageNum){
+                                html2+='<li class="active"><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                            }else {
+                                html2+='<li ><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                            }
+
                     }
+
+                    // result.data.navigatepageNums.forEach(function (e) {
+                    //     if(e==pageNum){
+                    //         html2+='<li class="active"><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                    //     }else {
+                    //         html2+='<li ><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                    //     }
+                    //
+                    // })
+
+
 
                     if(pageNum != result.data.pages){
                         layer.close(loadingIndex);

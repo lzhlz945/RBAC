@@ -149,3 +149,42 @@
 
 七、全选反选、单个删除
     新增全选反选$("#tBody").on("click",$("input[name=xz]"),function(){}，单条删除
+
+    setTimeout("test()","2000");  //2000毫秒后执行test()函数，只执行一次。
+    setInterval("test()","2000"); //每隔2000毫秒执行一次test()函数，执行无数次。
+    var interval = window.setInterval("test()","2000");
+    window.clearInterval(interval);     //停止执行setInterval循环。
+
+    当我们想让test()函数每隔2000毫秒执行一次，执行10000毫秒后停止执行时，可以用两者三者结合使用来实现。
+    var interval2 = window.setInterval("openit2()",2000);
+    setTimeout(function() {window.clearInterval(interval2);},10000);
+
+    带参方法执行延迟
+    setTimeout(function(){return executeQueryTask(data);},"10000");
+
+
+
+八、前端遍历分页
+
+     1、 var len=result.data.navigatepageNums.length;
+                           for(var j = 0; j < len; j++) {
+
+                                   if(result.data.navigatepageNums[j]==pageNum){
+                                       html2+='<li class="active"><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                                   }else {
+                                       html2+='<li ><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                                   }
+
+                           }
+
+
+     2、 array.forEach(function (e) {}
+
+        result.data.navigatepageNums.forEach(function (e) {
+                            if(e==pageNum){
+                                html2+='<li class="active"><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                            }else {
+                                html2+='<li ><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                            }
+
+                        })

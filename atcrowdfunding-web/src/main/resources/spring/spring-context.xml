@@ -37,7 +37,11 @@
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
         <property name="basePackage" value="com.zhang.zc.dao" />
     </bean>
-    
+    <!--配置一个可以进行批量执行的sqlSession  -->
+    <bean name="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" >
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <constructor-arg name="executorType" value="BATCH"/>
+    </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
         <property name="dataSource" ref="dataSource"/>
     </bean>

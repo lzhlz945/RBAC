@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping("/pages")
     @ResponseBody
     public Object pages(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
-                        @RequestParam(value = "pageSize",defaultValue = "2")Integer pageSize,
+                        @RequestParam(value = "pageSize",defaultValue = "8")Integer pageSize,
                         @RequestParam(value = "username")String username){
             AjaxMessage ajaxMessage = new AjaxMessage();
         try {
@@ -45,7 +45,8 @@ public class UserController {
             map.put("username",username);
             PageHelper.startPage(pageNum,pageSize);
             List<User> userList=userService.pageQuery(map);
-            PageInfo<User> pageInfo=new PageInfo<User>(userList,3);
+            PageInfo<User> pageInfo=new PageInfo<User>(userList,5);
+            pageInfo.setNavigatePages(5);
             ajaxMessage.setSuccess(true);
             ajaxMessage.setData(pageInfo);
 
@@ -132,6 +133,25 @@ public class UserController {
             e.printStackTrace();
         }
         return "redirect:/user/index";
+    }
+
+    //批量删除
+    @RequestMapping("/deleteBach")
+    @ResponseBody
+    public Object deleteBach(String[] ids){
+        AjaxMessage ajaxMessage = null;
+        try {
+            ajaxMessage = new AjaxMessage();
+            System.out.println(ids);
+            int count=userService.deleteBach(ids);
+            ajaxMessage.setCount(count);
+            ajaxMessage.setSuccess(true);
+        } catch (Exception e) {
+            ajaxMessage.setSuccess(false);
+            e.printStackTrace();
+
+        }
+        return ajaxMessage;
     }
 
 }

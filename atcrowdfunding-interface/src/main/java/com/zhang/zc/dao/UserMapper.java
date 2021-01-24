@@ -20,4 +20,6 @@ public interface UserMapper {
     int editUser(User user);
 
     void deleteByOne(Integer id);
+
+    int deleteBach(String[] ids);
 }

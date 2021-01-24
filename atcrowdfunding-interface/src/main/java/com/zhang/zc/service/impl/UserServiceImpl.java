@@ -66,4 +66,9 @@ public class UserServiceImpl implements UserService {
     public void deleteByOne(Integer id) {
         userMapper.deleteByOne(id);
     }
+
+    @Override
+    public int deleteBach(String[] ids) {
+        return userMapper.deleteBach(ids);
+    }
 }

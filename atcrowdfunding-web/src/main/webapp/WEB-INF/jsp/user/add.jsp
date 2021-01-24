@@ -219,9 +219,12 @@
                     if(data.success){
                         layer.msg("账户已可以使用", {time:2000, icon:1, shift:1}, function () {
                         });
+                        $("#updateBtn").attr("disabled",false);
+
                     }else {
                         layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
                         });
+                        $("#updateBtn").attr("disabled","disabled");
                     }
                 },
                 error:function () {

@@ -39,4 +39,13 @@
     <delete id="deleteByOne">
         delete from user where id=#{id}
     </delete>
+
+    <delete id="deleteBach">
+        delete from user where id in
+        <foreach collection="array" item="i" separator="," open="(" close=")">
+
+            #{i}
+
+        </foreach>
+    </delete>
 </mapper>

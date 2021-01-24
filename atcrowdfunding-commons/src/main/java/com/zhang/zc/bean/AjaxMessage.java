@@ -7,4 +7,5 @@ public class AjaxMessage {
 
     private Boolean success;
     private Object data;
+    private Integer count;
 }

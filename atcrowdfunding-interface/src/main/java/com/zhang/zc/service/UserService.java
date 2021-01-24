@@ -22,4 +22,7 @@ public interface UserService {
 
     //单条删除
     void deleteByOne(Integer valueOf);
+
+    //批量删除
+    int deleteBach(String[] ids);
 }
