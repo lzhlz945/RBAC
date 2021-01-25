@@ -188,3 +188,20 @@
                             }
 
                         })
+
+
+九、          //选中添加到右边
+  			$("button:eq(0)").click(function(){
+  				$("select[name=sel01] :selected").each(function(){
+  					//alert(this);
+  					$(this).appendTo("select[name=sel02]");
+  				});
+  			});
+
+  			//全部添加到右边
+  			$("button:eq(1)").click(function(){
+  				$("select[name=sel01] option").each(function(){
+  					//alert(this);
+  					$(this).appendTo("select[name=sel02]");
+  				});
+  			});
