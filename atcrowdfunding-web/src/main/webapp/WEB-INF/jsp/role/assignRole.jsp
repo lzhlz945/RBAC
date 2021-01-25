@@ -135,7 +135,7 @@
                     <form role="form" class="form-inline">
                         <div class="form-group">
                             <label for="exampleInputPassword1">未分配角色列表</label><br>
-                            <select class="form-control" multiple size="10" name="sel01" style="width:200px;overflow-y:auto;">
+                            <select class="form-control" multiple id="s1" size="10" name="sel01" style="width:200px;overflow-y:auto;">
 
 
                                 <c:forEach items="${requestScope.rList}" var="role">
@@ -160,12 +160,15 @@
                         </div>
                         <div class="form-group" style="margin-left:40px;">
                             <label for="exampleInputPassword1">已分配角色列表</label><br>
+                            <form id="formBtn" method="post" action="${Path_APP}/role/assignRoles">
                             <select class="form-control" multiple size="10" name="sel02" style="width:200px;overflow-y:auto;">
                                 <c:forEach items="${requestScope.userRole}" var="role1">
-                                    <option value="${requestScope.userId}">"${role1.name}"</option>
+                                    <option value="${role1.id}">"${role1.name}"</option>
                                 </c:forEach>
 
                             </select>
+                                <input type="submit" value="提交">
+                                </form>
                         </div>
                     </form>
                 </div>
@@ -221,13 +224,17 @@
                 //alert(this);
                 $(this).appendTo("select[name=sel02]");
             });
+
+            $("#formBtn").submit();
+
         })
 
         //取消权限
         $("#but2").click(function () {
             $("select[name=sel02] :selected").each(function(){
                 //alert(this);
-                $(this).appendTo("select[name=sel01]");
+
+            $(this).appendTo("select[name=sel01]");
             });
         })
     });
