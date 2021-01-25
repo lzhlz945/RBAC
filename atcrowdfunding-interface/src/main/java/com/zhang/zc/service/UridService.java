@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface UridService {
 
+    //角色控制
+    void assignRole(Integer[] ids, Integer userId);
 }

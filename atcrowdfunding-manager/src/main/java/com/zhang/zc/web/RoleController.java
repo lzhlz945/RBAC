@@ -12,6 +12,7 @@ import com.zhang.zc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,6 +92,26 @@ public class RoleController {
 
 
     }
+
+    //授权：先删除以前的权限在来授权
+    @RequestMapping("/assignRole")
+    @ResponseBody
+    public Object assignRole(Integer[] ids,Integer userId){
+        System.out.println(ids);
+        System.out.println(userId);
+            AjaxMessage ajaxMessage = new AjaxMessage();
+        try {
+            //角色控制
+            uridService.assignRole(ids,userId);
+            ajaxMessage.setSuccess(true);
+
+        } catch (Exception e) {
+            ajaxMessage.setSuccess(false);
+            e.printStackTrace();
+        }
+        return ajaxMessage;
+    }
+
 
 
 }

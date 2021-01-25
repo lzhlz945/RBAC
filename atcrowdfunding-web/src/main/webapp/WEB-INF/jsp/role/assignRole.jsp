@@ -153,24 +153,33 @@
                         </div>
                         <div class="form-group">
                             <ul>
-                                <li class="btn btn-default glyphicon glyphicon-chevron-right" id="but1"></li>
+                                <button id="qbsq" type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> 全部添加</button>
                                 <br>
-                                <li class="btn btn-default glyphicon glyphicon-chevron-left" id="but2" style="margin-top:20px;"></li>
+                                <br>
+                                <li class="btn btn-info glyphicon glyphicon-chevron-right" id="but1">选择添加</li>
+                                <br>
+                                <li class="btn btn-info glyphicon glyphicon-chevron-left" id="but2" style="margin-top:20px;">选择移除</li>
+                                <br><br>
+                                <button id="qbbsq" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>全部移除</button>
+
                             </ul>
                         </div>
                         <div class="form-group" style="margin-left:40px;">
                             <label for="exampleInputPassword1">已分配角色列表</label><br>
-                            <form id="formBtn" method="post" action="${Path_APP}/role/assignRoles">
+
                             <select class="form-control" multiple size="10" name="sel02" style="width:200px;overflow-y:auto;">
                                 <c:forEach items="${requestScope.userRole}" var="role1">
                                     <option value="${role1.id}">"${role1.name}"</option>
                                 </c:forEach>
 
                             </select>
-                                <input type="submit" value="提交">
-                                </form>
+
                         </div>
                     </form>
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button type="button" id="sqbtn" class="btn btn-primary"><i class="glyphicon glyphicon-user"></i>点击授权</button>
+
                 </div>
             </div>
         </div>
@@ -202,9 +211,11 @@
         </div>
     </div>
 </div>
+
 <script src="${Path_APP}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${Path_APP}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${Path_APP}/script/docs.min.js"></script>
+<script src="${Path_APP}/layer/layer.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -225,7 +236,24 @@
                 $(this).appendTo("select[name=sel02]");
             });
 
-            $("#formBtn").submit();
+        })
+
+        //全部添加
+        $("#qbsq").click(function () {
+            $("select[name=sel01] option").each(function(){
+                //alert(this);
+                $(this).appendTo("select[name=sel02]");
+            });
+
+        })
+
+        //全部移除
+        $("#qbbsq").click(function () {
+            $("select[name=sel02] option").each(function(){
+                //alert(this);
+                $(this).appendTo("select[name=sel01]");
+                // alert($(this).val())
+            });
 
         })
 
@@ -233,9 +261,44 @@
         $("#but2").click(function () {
             $("select[name=sel02] :selected").each(function(){
                 //alert(this);
-
             $(this).appendTo("select[name=sel01]");
+            // alert($(this).val())
             });
+
+        })
+
+        $("#sqbtn").click(function () {
+            var params="userId=${requestScope.userId}&"
+            $("select[name=sel02] option").each(function(){
+                params+='ids='+$(this).val()+"&";
+            });
+
+            // alert(params)
+            params=params.substring(0,(params.lastIndexOf("&")))
+            alert(params)
+            var loadingIndex=null;
+            $.ajax({
+                url:"${Path_APP}/role/assignRole",
+                data:params,
+                type:"post",
+                beforeSend:function () {
+                    loadingIndex = layer.msg('加载中...', {icon: 16});
+                },
+                success:function (data) {
+                    layer.close(loadingIndex);
+                    if(data.success){
+                        layer.msg("授权成功", {time:2000, icon:1, shift:1}, function () {
+                        });
+                        window.location.href="${Path_APP}/role/toAssign?userId=${requestScope.userId}"
+
+                    }else {
+                        layer.msg("授权失败！！！", {time:2000, icon:5, shift:6}, function () {
+                        });
+                    }
+                }
+
+
+            })
         })
     });
 </script>

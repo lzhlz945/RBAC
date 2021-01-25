@@ -16,10 +16,10 @@
 
     <select id="selectRoleList" resultType="role">
 
-         SELECT r1.name from role r1
+         SELECT r1.name name,r1.id id from role r1
         where r1.id not in
         (
-        SELECT r.id id FROM
+        SELECT r.id id1 FROM
         `user` u left JOIN  urid ur
          on u.id=ur.uId
          join role r

@@ -3,6 +3,19 @@
 <mapper namespace="com.zhang.zc.dao.UridMapper">
 
 
+    <delete id="deleteUserRoleById">
+        DELETE FROM urid where uId=#{id}
+    </delete>
 
+
+    <insert id="assignRole">
+        insert into urid(rid,uId) values
+        <foreach collection="list" separator="," item="u">
+            (
+             #{u.rId},
+             #{u.uId}
+            )
+        </foreach>
+    </insert>
 
 </mapper>

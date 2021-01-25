@@ -11,4 +11,7 @@ import java.util.List;
  * @date:2021/1/25
  */
 public interface UridMapper {
+    void deleteUserRoleById(Integer userId);
+
+    void assignRole(List<Urid> list);
 }
