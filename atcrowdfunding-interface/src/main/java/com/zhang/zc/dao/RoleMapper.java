@@ -14,5 +14,5 @@ import java.util.Map;
 public interface RoleMapper {
     List<Role> pageQuery(Map<String, String> map);
 
-    List<Role> selectRoleList();
+    List<Role> selectRoleList(Integer id);
 }

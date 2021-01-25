@@ -16,6 +16,15 @@
 
     <select id="selectRoleList" resultType="role">
 
-        select * from role
+         SELECT r1.name from role r1
+        where r1.id not in
+        (
+        SELECT r.id id FROM
+        `user` u left JOIN  urid ur
+         on u.id=ur.uId
+         join role r
+         on ur.rid = r.id
+         where u.id =#{id}
+        )
     </select>
 </mapper>

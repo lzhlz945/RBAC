@@ -16,5 +16,5 @@ public interface RoleService {
     List<Role> pageQuery(Map<String, String> map);
 
     //查询role的所有记录
-    List<Role> selectRoleList();
+    List<Role> selectRoleList(Integer id);
 }

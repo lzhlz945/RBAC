@@ -74,16 +74,19 @@ public class RoleController {
     @RequestMapping("/toAssign")
     public String toAssign(String userId, Model model){
 
-        //查询所有的用户角色以作为权限的分配
-        List<Role> roleList=roleService.selectRoleList();
+        //查询用户角色没有被分配的
+        List<Role> roleList=roleService.selectRoleList(Integer.valueOf(userId));
         //查询出当前user的角色的职位信息
 
         User user1=userService.queryUserRole(Integer.valueOf(userId));
 
+        if(user1!=null){
+
         List<Role> userRole = user1.getRole();
+        model.addAttribute("userRole",userRole);
+        }
         model.addAttribute("userId",userId);
         model.addAttribute("rList",roleList);
-        model.addAttribute("userRole",userRole);
         return "role/assignRole";
 
 
