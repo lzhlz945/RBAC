@@ -221,39 +221,47 @@
                         params+="&"
                     }
                 }
-                var loadingIndex=null;
-                alert(params)
-                $.ajax({
-                    url:"${Path_APP}/user/deleteBach",
-                    type:"POST",
-                    dataType:"json",
-                    data:params,
-                    beforeSend:function () {
-                        loadingIndex = layer.msg('加载中...', {icon: 16});
-                    },
-                    success:function (data) {
-                        layer.close(loadingIndex);
-                        if(data.success){
-                            layer.msg("成功删除："+data.count+"条记录", {time:2000, icon:1, shift:1}, function () {
-                            });
-                            window.setInterval("pages(1)",2000);
+
+                layer.confirm("确定删除",  {icon: 3, title:'提示'}, function(cindex){
+                    var loadingIndex=null;
+                    // alert(params)
+                    $.ajax({
+                        url:"${Path_APP}/user/deleteBach",
+                        type:"POST",
+                        dataType:"json",
+                        data:params,
+                        beforeSend:function () {
                             loadingIndex = layer.msg('加载中...', {icon: 16});
+                        },
+                        success:function (data) {
+                            layer.close(loadingIndex);
+                            if(data.success){
+                                layer.msg("成功删除："+data.count+"条记录", {time:2000, icon:1, shift:1}, function () {
+                                });
+                                // window.setInterval("pages(1)",2000);
+                                window.location.href="${Path_APP}/user/index"
+                                loadingIndex = layer.msg('加载中...', {icon: 16});
 
 
-                        }else {
-                            layer.msg("删除失败！！！", {time:2000, icon:5, shift:6}, function () {
-                            });
+                            }else {
+                                layer.msg("删除失败！！！", {time:2000, icon:5, shift:6}, function () {
+                                });
+                            }
+
                         }
 
-                    }
+                    })
+                    layer.close(cindex);
+                }, function(cindex){
+                    layer.close(cindex);
+                });
 
-                })
             }
         })
 
         pages(1);
         $("#queryBtn").click(function () {
-              pages(1)
+            pages(1)
         })
 
 
@@ -281,35 +289,35 @@
                 if(result.success){
                     var html1="";
                     var html2="";
-                $.each(result.data.list,function (i,n) {
-                    html1+='<tr>';
-                    html1+='<td>'+i+'</td>';
-                    html1+='<td><input type="checkbox" name="xz" value="'+n.id+'"></td>';
-                    html1+='   <td>'+n.userAccount+'</td>';
-                    html1+='   <td>'+n.username+'</td>';
-                    html1+='   <td>'+n.email+'</td>';
-                    html1+='    <td>';
-                    html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
-                    html1+='<button type="button" onclick="goUpdatePage('+n.id+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
-                    html1+='<button type="button" onclick="deleteFun1('+n.id+')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
-                    html1+='</td>';
-                    html1+='</tr>';
+                    $.each(result.data.list,function (i,n) {
+                        html1+='<tr>';
+                        html1+='<td>'+i+'</td>';
+                        html1+='<td><input type="checkbox" name="xz" value="'+n.id+'"></td>';
+                        html1+='   <td>'+n.userAccount+'</td>';
+                        html1+='   <td>'+n.username+'</td>';
+                        html1+='   <td>'+n.email+'</td>';
+                        html1+='    <td>';
+                        html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
+                        html1+='<button type="button" onclick="goUpdatePage('+n.id+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
+                        html1+='<button type="button" onclick="deleteFun1('+n.id+')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
+                        html1+='</td>';
+                        html1+='</tr>';
 
-                });
-                if(pageNum >1){
-                    layer.close(loadingIndex);
-                    html2+='<li ><a href="#" onclick="pages('+1+')">首页</a></li>';
-                    html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
-                }
+                    });
+                    if(pageNum >1){
+                        layer.close(loadingIndex);
+                        html2+='<li ><a href="#" onclick="pages('+1+')">首页</a></li>';
+                        html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
+                    }
 
-                  var len=result.data.navigatepageNums.length;
+                    var len=result.data.navigatepageNums.length;
                     for(var j = 0; j < len; j++) {
 
-                            if(result.data.navigatepageNums[j]==pageNum){
-                                html2+='<li class="active"><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
-                            }else {
-                                html2+='<li ><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
-                            }
+                        if(result.data.navigatepageNums[j]==pageNum){
+                            html2+='<li class="active"><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                        }else {
+                            html2+='<li ><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                        }
 
                     }
 
