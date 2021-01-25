@@ -2,6 +2,8 @@ package com.zhang.zc.bean;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class User {
     private Integer id;
@@ -9,4 +11,6 @@ public class User {
     private String password;
     private String username;
     private String email;
+    private List<Role> role;
+    private List<Urid> urid;
 }

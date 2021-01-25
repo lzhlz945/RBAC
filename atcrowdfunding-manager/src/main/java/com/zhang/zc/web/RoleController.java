@@ -4,10 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhang.zc.bean.AjaxMessage;
 import com.zhang.zc.bean.Role;
+import com.zhang.zc.bean.Urid;
 import com.zhang.zc.bean.User;
 import com.zhang.zc.service.RoleService;
+import com.zhang.zc.service.UridService;
+import com.zhang.zc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +32,10 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private UridService uridService;
+    @Autowired
+    private UserService userService;
 
 
     //跳转到role分页页面
@@ -61,4 +69,25 @@ public class RoleController {
 
         return ajaxMessage;
     }
+
+    //跳转分配权限
+    @RequestMapping("/toAssign")
+    public String toAssign(String userId, Model model){
+
+        //查询所有的用户角色以作为权限的分配
+        List<Role> roleList=roleService.selectRoleList();
+        //查询出当前user的角色的职位信息
+
+        User user1=userService.queryUserRole(Integer.valueOf(userId));
+
+        List<Role> userRole = user1.getRole();
+        model.addAttribute("userId",userId);
+        model.addAttribute("rList",roleList);
+        model.addAttribute("userRole",userRole);
+        return "role/assignRole";
+
+
+    }
+
+
 }

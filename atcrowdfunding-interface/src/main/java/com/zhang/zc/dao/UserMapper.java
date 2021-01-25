@@ -22,4 +22,6 @@ public interface UserMapper {
     void deleteByOne(Integer id);
 
     int deleteBach(String[] ids);
+
+    User queryUserRole(Integer id);
 }

@@ -14,4 +14,7 @@ import java.util.Map;
 public interface RoleService {
     //role异步分页
     List<Role> pageQuery(Map<String, String> map);
+
+    //查询role的所有记录
+    List<Role> selectRoleList();
 }

@@ -297,7 +297,7 @@
                         html1+='   <td>'+n.username+'</td>';
                         html1+='   <td>'+n.email+'</td>';
                         html1+='    <td>';
-                        html1+='    <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
+                        html1+='    <button type="button" onclick="assignment('+n.id+')" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
                         html1+='<button type="button" onclick="goUpdatePage('+n.id+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
                         html1+='<button type="button" onclick="deleteFun1('+n.id+')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
                         html1+='</td>';
@@ -359,6 +359,13 @@
     function goUpdatePage(userId){
         alert(userId)
         window.location.href="${Path_APP}/user/toEdit?userId="+userId;
+
+    }
+
+    //分配权限
+    function assignment(userId){
+        alert(userId)
+        window.location.href="${Path_APP}/role/toAssign?userId="+userId;
 
     }
 

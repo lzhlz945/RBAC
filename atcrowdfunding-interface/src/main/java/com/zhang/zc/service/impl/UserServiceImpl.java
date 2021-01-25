@@ -71,4 +71,11 @@ public class UserServiceImpl implements UserService {
     public int deleteBach(String[] ids) {
         return userMapper.deleteBach(ids);
     }
+
+    @Override
+    public User queryUserRole(Integer id) {
+
+
+        return userMapper.queryUserRole(id);
+    }
 }

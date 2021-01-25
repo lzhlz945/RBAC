@@ -13,4 +13,9 @@
         </where>
     </select>
 
+
+    <select id="selectRoleList" resultType="role">
+
+        select * from role
+    </select>
 </mapper>

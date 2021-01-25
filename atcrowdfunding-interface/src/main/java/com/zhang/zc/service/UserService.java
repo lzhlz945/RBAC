@@ -25,4 +25,6 @@ public interface UserService {
 
     //批量删除
     int deleteBach(String[] ids);
+
+    User queryUserRole(Integer valueOf);
 }

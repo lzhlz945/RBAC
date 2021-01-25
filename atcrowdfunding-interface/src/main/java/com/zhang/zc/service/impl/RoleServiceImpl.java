@@ -27,4 +27,10 @@ public class RoleServiceImpl implements RoleService {
 
         return  roleMapper.pageQuery(map);
     }
+
+    @Override
+    public List<Role> selectRoleList() {
+
+        return roleMapper.selectRoleList();
+    }
 }

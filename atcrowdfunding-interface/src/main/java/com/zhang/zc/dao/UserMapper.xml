@@ -48,4 +48,31 @@
 
         </foreach>
     </delete>
+    <resultMap id="user1" type="com.zhang.zc.bean.User">
+        <id column="id" property="id"/>
+        <result column="useraccount" property="userAccount" />
+        <result column="password" property="password" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <collection property="role" ofType="com.zhang.zc.bean.Role">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+
+        </collection>
+        <collection property="urid" ofType="com.zhang.zc.bean.Urid">
+            <id column="id" property="id"/>
+            <result column="uId" property="uId" />
+            <result column="rid" property="rId" />
+        </collection>
+    </resultMap>
+
+    <select id="queryUserRole" resultMap="user1">
+        SELECT u.id uId,u.username username,r.id rId,r.`name` name,ur.id urId FROM
+       `user` u left JOIN  urid ur
+        on u.id=ur.uId
+        join role r
+        on ur.rid = r.id
+        where u.id=#{id}
+
+    </select>
 </mapper>

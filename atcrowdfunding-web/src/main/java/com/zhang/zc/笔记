@@ -205,3 +205,9 @@
   					$(this).appendTo("select[name=sel02]");
   				});
   			});
+
+  			SELECT u.id uId,u.username username,r.id rId,ur.id urId FROM
+            `user` u left JOIN  urid ur
+             on u.id=ur.uId
+             join role r
+             on ur.rid = r.id
