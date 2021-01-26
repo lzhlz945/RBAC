@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.zc.dao.RoleMapper">
+
+
+    <select id="pageQuery" resultType="role">
+
+        select * from role
+        <where>
+            <if test="name != null and name !=''">
+                and name LIKE '%' #{name} '%'
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectRoleList" resultType="role">
+
+         SELECT r1.name name,r1.id id from role r1
+        where r1.id not in
+        (
+        SELECT r.id id1 FROM
+        `user` u left JOIN  urid ur
+         on u.id=ur.uId
+         join role r
+         on ur.rid = r.id
+         where u.id =#{id}
+        )
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function a() { //在js中 这是方法也是对象
+    this.age=12
+    }
+    var a1 = new a();
+    a1.name="zs"
+    // alert(a1.name)
+    // alert(a1.age)
+
+    var user={
+        name:"zs",age:1,
+        a1:function () {
+            alert(123)
+        }
+    }
+
+    var areay=[{},{}]
+
+    alert(user.age)
+    alert(user.a1())
+    alert(areay.length)
+
+//json可以是没有约束的对象，也可以是数组
+
+    function fun1() {
+         abc="a"
+    }
+    fun1()
+    alert(abc)
+</script>
+
+</body>
+</html>

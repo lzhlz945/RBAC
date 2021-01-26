@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.zc.dao.UserMapper">
+
+
+    <select id="query4login" resultType="user">
+        select * from user where userAccount=#{userAccount} and password=#{password}
+    </select>
+
+
+    <!--分页查询-->
+    <select id="pageQuery" resultType="user">
+        select * from user
+        <where>
+            <if test="username!=null and username != ''">
+                and username like '%' #{username} '%'
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <insert id="insert">
+        insert into user(userAccount,password,username,email) values (#{userAccount},#{password},#{username},#{email})
+    </insert>
+
+    <select id="selectOne" resultType="user">
+        select * from user where id=#{userId}
+    </select>
+
+    <select id="toCheckAccount" resultType="Integer">
+        select count(*) from user where userAccount=#{userAccount}
+    </select>
+
+    <update id="editUser">
+        update  user set userAccount=#{userAccount},username=#{username},password=#{password},email=#{email}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteByOne">
+        delete from user where id=#{id}
+    </delete>
+
+    <delete id="deleteBach">
+        delete from user where id in
+        <foreach collection="array" item="i" separator="," open="(" close=")">
+
+            #{i}
+
+        </foreach>
+    </delete>
+    <resultMap id="user1" type="com.zhang.zc.bean.User">
+        <id column="id" property="id"/>
+        <result column="useraccount" property="userAccount" />
+        <result column="password" property="password" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <collection property="role" ofType="com.zhang.zc.bean.Role">
+            <id column="rId" property="id"/>
+            <result column="name" property="name"/>
+
+        </collection>
+        <collection property="urid" ofType="com.zhang.zc.bean.Urid">
+            <id column="id" property="id"/>
+            <result column="uId" property="uId" />
+            <result column="rid" property="rId" />
+        </collection>
+    </resultMap>
+
+    <select id="queryUserRole" resultMap="user1">
+        SELECT u.id uId,u.username username,r.id rId,r.`name` name,ur.id urId FROM
+       `user` u left JOIN  urid ur
+        on u.id=ur.uId
+        join role r
+        on ur.rid = r.id
+        where u.id=#{id}
+
+    </select>
+</mapper>

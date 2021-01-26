@@ -1,0 +1,213 @@
+一、json字符串
+
+    1、在js中：
+       function fun1(){
+         this.name="ss"
+       }这是方法也是对象,但这个对象限定为fun1
+
+    2、json：
+       var fun2={name:"zs",age:12,(对象的属性)
+             a:function(){} 对象的方法
+       }
+       这是json格式的对象 浏览器可以解析
+
+二、 js的作用域
+
+     function fun3(){
+        var a="zs"
+     }
+     fun3()
+     alert(a) (会报错，因为a没有定义) alert是Windows的方法
+     全局作用域 把var 去掉就可以le
+三、路径问题
+    前端/ 到端口号
+    后端/ 到端项目名
+
+    1、使用监听器 放在application中
+
+    2、使用一个页面
+      <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+      <%
+          String basePath = request.getScheme()
+                  + "://"
+                  + request.getServerName()
+                  + ":"
+                  + request.getServerPort()
+                  + request.getContextPath()
+                  + "/";
+          pageContext.setAttribute("basePath",basePath);
+      %>
+
+      <!--写base标签，永远固定相对路径跳转的结果-->
+      <base href="<%=basePath%>">
+      <link type="text/css" rel="stylesheet" href="static/css/style.css" >
+      <script type="text/javascript" src="static/jQuery/jquery-1.7.2.js"></script>
+
+     其他页面： <%@ include file="/xx/xx/xx/xx.jsp"/>
+
+
+四、RBAC 权限
+
+    RBAC一共分为4个级别
+    1、 RBAC0 基础的权限控制
+    2、 RBAC1 在RBAC0的基础上添加了角色的继承功能，例如销售经理就应该继承销售员那么销售经理
+              就会拥有销售员的所有功能外加销售的经理的特殊功能
+    3、 RBAC2 在RBAC0的基础上添加了互斥的功能，例如一个员工拥有了会计的角色，那么它就不能再拥有
+              出纳的角色
+    4、 RBAC3 即拥有RBAC1也同时拥有RBAC2的功能
+    1、permission （权限表/许可表）
+       表结构
+       id    name            url               code  [ type   parentId   icon  ...]
+
+    2、role  角色表
+    表结构
+    id       name
+
+    3、 user   用户表
+
+    表结构
+    id     username     password
+
+    4、 role_permission  角色和权限的多对多关联表
+    表结构
+    id    role_id     permission_id
+
+    5、 user_role  用户和角色的多对多关联表
+
+    表结构
+    id     user_id     role_id
+    注意：这2张多对多的关联表不需要提供独立的增删改查，来维护表中的数据，在项目部署时必须
+          要将一些必须的数据初始化到数据库中，例如管理员用户与管理员角色的管理，以及管理员
+          角色和一些基础功能的关联
+
+五、分页 使用ajax
+   1、返回的数据封装在公共的类中
+      private Object data;  把分页的类放在这个 公共类中
+
+   2、前端
+      用数据拼接完成
+      分页部分
+       if(pageNum >1){
+                          layer.close(loadingIndex);
+                          html2+='<li ><a href="#" onclick="pages('+1+')">首页</a></li>';
+                          html2+='<li ><a href="#" onclick="pages('+(pageNum-1)+')">上一页</a></li>';
+                      }
+
+                          for (var i = 1; i <=result.data.pages ; i++) {
+                              if(i==pageNum){
+                              html2+='<li class="active"><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
+                              }else {
+                                  html2+='<li ><a href="#" onclick="pages('+i+')">'+i+'</a></li>';
+                              }
+                          }
+
+                          if(pageNum != result.data.pages){
+                              layer.close(loadingIndex);
+                              html2+='<li ><a href="#" onclick="pages('+(pageNum+1)+')">下一页</a></li>';
+                              html2+='<li ><a href="#" onclick="pages('+result.data.pages+')">尾页</a></li>';
+                          }
+
+
+六、新增修改
+
+    用onclick() 这个方法修改
+    验证账户change 输入框改变值失去焦点触发
+         $("#userAccount").change(function () {
+                var userAccount= $("#userAccount").val();
+                if(userAccount==""){
+                    layer.msg("登录账号不能为空", {time:2000, icon:5, shift:6}, function () {
+                    });
+                    return;
+                }
+                var loadingIndex =null;
+                $.ajax({
+                    url:"${Path_APP}/user/checkAccount",
+                    data:{"userAccount":userAccount},
+                    type:"get",
+                    beforeSend:function () {
+                        loadingIndex = layer.msg('加载中...', {icon: 16});
+                    },
+                    success:function (data) {
+                        layer.close(loadingIndex);
+                        if(data.success){
+                            layer.msg("账户已可以使用", {time:2000, icon:1, shift:1}, function () {
+                            });
+
+                        }else {
+                            layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
+                            });
+                        }
+                    },
+                    error:function () {
+                        layer.close(loadingIndex);
+                        layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
+                        });
+                    }
+
+                })
+            })
+
+七、全选反选、单个删除
+    新增全选反选$("#tBody").on("click",$("input[name=xz]"),function(){}，单条删除
+
+    setTimeout("test()","2000");  //2000毫秒后执行test()函数，只执行一次。
+    setInterval("test()","2000"); //每隔2000毫秒执行一次test()函数，执行无数次。
+    var interval = window.setInterval("test()","2000");
+    window.clearInterval(interval);     //停止执行setInterval循环。
+
+    当我们想让test()函数每隔2000毫秒执行一次，执行10000毫秒后停止执行时，可以用两者三者结合使用来实现。
+    var interval2 = window.setInterval("openit2()",2000);
+    setTimeout(function() {window.clearInterval(interval2);},10000);
+
+    带参方法执行延迟
+    setTimeout(function(){return executeQueryTask(data);},"10000");
+
+
+
+八、前端遍历分页
+
+     1、 var len=result.data.navigatepageNums.length;
+                           for(var j = 0; j < len; j++) {
+
+                                   if(result.data.navigatepageNums[j]==pageNum){
+                                       html2+='<li class="active"><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                                   }else {
+                                       html2+='<li ><a href="#" onclick="pages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
+                                   }
+
+                           }
+
+
+     2、 array.forEach(function (e) {}
+
+        result.data.navigatepageNums.forEach(function (e) {
+                            if(e==pageNum){
+                                html2+='<li class="active"><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                            }else {
+                                html2+='<li ><a href="#" onclick="pages('+e+')">'+e+'</a></li>';
+                            }
+
+                        })
+
+
+九、          //选中添加到右边
+  			$("button:eq(0)").click(function(){
+  				$("select[name=sel01] :selected").each(function(){
+  					//alert(this);
+  					$(this).appendTo("select[name=sel02]");
+  				});
+  			});
+
+  			//全部添加到右边
+  			$("button:eq(1)").click(function(){
+  				$("select[name=sel01] option").each(function(){
+  					//alert(this);
+  					$(this).appendTo("select[name=sel02]");
+  				});
+  			});
+
+  			SELECT u.id uId,u.username username,r.id rId,ur.id urId FROM
+            `user` u left JOIN  urid ur
+             on u.id=ur.uId
+             join role r
+             on ur.rid = r.id

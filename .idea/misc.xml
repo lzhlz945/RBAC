@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/atcrowdfunding-parent" />
+    <file type="web" url="file://$PROJECT_DIR$/atcrowdfunding-web" />
+  </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="FLOW" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/test-rbac/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-commons/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-portal/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-web/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfundinginterface/pom.xml" />
+        <option value="$PROJECT_DIR$/atcrowdfunding-interface/pom.xml" />
       </list>
     </option>
   </component>
