@@ -15,5 +15,5 @@ public interface PermissionMapper {
     @Select("select * from permission")
     List<Permission> queryPermissionMenu();
 
-    Permission queryPermissionMenu1(Integer id);
+    List<Permission> queryPermissionMenu1(Integer id);
 }

@@ -36,16 +36,16 @@ public class PermissionController {
     @RequestMapping("/loadData")
     public Object loadData(){
 
-        List<Permission> permission = new ArrayList<Permission>();
+//        List<Permission> permission = new ArrayList<Permission>();
     /*    Permission root = new Permission();
         root.setName("顶级节点");
         Permission children = new Permission();
         children.setName("子节点");
         root.getChildren().add(children);
         permission.add(root);*/
-        Permission menu2=permissionService.queryPermissionMenu1(0);
-        List<Permission> menu=permissionService.queryPermissionMenu();
-        permission.add(menu2);
+//        List<Permission> menu=permissionService.queryPermissionMenu();
+        List<Permission> menu2=permissionService.queryPermissionMenu1(0);
+
         //ArrayList比LinkedList 查询快，有索引  map必用到索引
         /*Map<Integer,Permission> map=new HashMap<Integer, Permission>();
         for (Permission menu1 : menu) {
@@ -60,6 +60,6 @@ public class PermissionController {
                 parent.getChildren().add(children);
             }
         }*/
-        return permission;
+        return menu2;
     }
 }

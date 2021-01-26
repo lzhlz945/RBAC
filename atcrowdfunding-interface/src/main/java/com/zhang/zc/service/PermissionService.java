@@ -14,6 +14,6 @@ public interface PermissionService {
     List<Permission> queryPermissionMenu();
 
     //使用xml
-    Permission queryPermissionMenu1(Integer id);
+    List<Permission> queryPermissionMenu1(Integer id);
 
 }

@@ -26,7 +26,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public Permission queryPermissionMenu1(Integer id) {
+    public List<Permission> queryPermissionMenu1(Integer id) {
         return  permissionMapper. queryPermissionMenu1(id);
     }
 }
