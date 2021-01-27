@@ -168,6 +168,7 @@
 <script src="${Path_APP}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${Path_APP}/script/docs.min.js"></script>
 <script src="${Path_APP}/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script src="${Path_APP}/layer/layer.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -281,6 +282,7 @@
     //添加子节点
     function addNode(id) {
 
+
         window.location.href="${Path_APP}/permission/toAdd?pid="+id;
 
     }
@@ -289,6 +291,18 @@
     function editNode(id) {
 
         window.location.href="${Path_APP}/permission/toEdit?id="+id;
+    }
+
+    //删除节点
+    function deleteNode(id) {
+
+        layer.confirm("确定删除本节点吗?",  {icon: 3, title:'提示'}, function(cindex){
+        window.location.href="${Path_APP}/permission/delete?id="+id;
+            layer.close(cindex);
+        }, function(cindex){
+            layer.close(cindex);
+        });
+
     }
 </script>
 </body>

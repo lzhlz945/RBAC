@@ -51,4 +51,16 @@ public class PermissionServiceImpl implements PermissionService {
     public Permission selectPermissionById(Integer id) {
         return permissionMapper.selectPermissionById(id);
     }
+
+    @Override
+    public void edit(Permission permission) {
+        permissionMapper.edit(permission);
+    }
+
+    @Override
+    public void deleteNode(Integer id) {
+        permissionMapper.deleteNode(id);
+        permissionMapper.deleteChildrenNode(id);
+//        System.out.println(10/0);
+    }
 }

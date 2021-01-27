@@ -69,6 +69,33 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="layer/layer.js"></script>
 <script>
+    $(function () {
+       //如果顶层窗口不是当前窗口
+        if(window.top!=window){
+            //将顶层窗口设置为当前窗口
+            window.top.location=window.location;
+        }
+        $(window).keydown(function (e) {
+            var userAccount=$("#userAccount").val();
+            var password=$("#password").val();
+
+            if(userAccount == ""){
+                layer.msg("账号不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+
+                });
+                return;
+            }
+            if(password == ""){
+                layer.msg("密码不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+
+                });
+                return;
+            }
+            if(e.keyCode==13){
+                login(userAccount,password);
+            }
+        })
+    })
     function dologin() {
        var userAccount=$("#userAccount").val();
        var password=$("#password").val();
@@ -85,32 +112,38 @@
            });
            return;
        }
+
+       login(userAccount,password)
+
+
+    }
+
+    function login(userAccount,password) {
         var loadingIndex =null;
-       $.ajax({
-           url:"doLogin",
-           data:{
-               "userAccount":userAccount,
-               "password":password
-           },
-           type:"POST",
-           dataType:"json",
-           beforeSend:function () {
-               loadingIndex = layer.msg('处理中', {icon: 16});
-               
-           },
-           success:function (data) {
+        $.ajax({
+            url:"doLogin",
+            data:{
+                "userAccount":userAccount,
+                "password":password
+            },
+            type:"POST",
+            dataType:"json",
+            beforeSend:function () {
+                loadingIndex = layer.msg('处理中', {icon: 16});
+
+            },
+            success:function (data) {
                 layer.close(loadingIndex);
-               if(data.success){
+                if(data.success){
                     window.location.href="main";
-               }else {
-                   layer.msg("账号或者密码错误", {time:2000, icon:5, shift:6}, function () {
+                }else {
+                    layer.msg("账号或者密码错误", {time:2000, icon:5, shift:6}, function () {
 
-                   });
-               }
+                    });
+                }
 
-           }
-       })
-
+            }
+        })
     }
 </script>
 </body>

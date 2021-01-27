@@ -29,4 +29,20 @@
 
         select * from permission where id=#{id}
     </select>
+
+    <update id="edit">
+
+        update permission set name=#{name},url=#{url} where id=#{id}
+    </update>
+
+    <!--删除父节点-->
+    <delete id="deleteNode">
+        delete from permission where id=#{id}
+    </delete>
+    <!--删除子节点-->
+    <delete id="deleteChildrenNode">
+
+        delete from permission where pid=#{id}
+    </delete>
+
 </mapper>

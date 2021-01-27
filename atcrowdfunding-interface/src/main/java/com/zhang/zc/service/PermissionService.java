@@ -23,4 +23,9 @@ public interface PermissionService {
     void  insert(Permission permission);
 
     Permission selectPermissionById(Integer id);
+
+    //修改permission信息
+    void edit(Permission permission);
+
+    void deleteNode(Integer id);
 }

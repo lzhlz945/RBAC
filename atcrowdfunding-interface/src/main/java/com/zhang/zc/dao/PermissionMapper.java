@@ -22,4 +22,10 @@ public interface PermissionMapper {
     void insert(Permission permission);
 
     Permission selectPermissionById(Integer id);
+
+    void edit(Permission permission);
+
+    void deleteNode(Integer id);
+
+    void deleteChildrenNode(Integer id);
 }

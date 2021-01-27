@@ -118,5 +118,29 @@ public class PermissionController {
         return "permission/edit";
     }
 
+    //修改permission信息
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Object edit(Permission permission){
+
+        AjaxMessage ajaxMessage = new AjaxMessage();
+
+        try {
+            permissionService.edit(permission);
+            ajaxMessage.setSuccess(true);
+        } catch (Exception e) {
+            ajaxMessage.setSuccess(false);
+            e.printStackTrace();
+        }
+        return ajaxMessage;
+    }
+
+    //删除子节点
+    @RequestMapping("/delete")
+    public String deleteNode(Integer id){
+
+        permissionService.deleteNode(id);
+        return "redirect:/permission/index";
+    }
 
 }
