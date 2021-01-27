@@ -1,9 +1,11 @@
 package com.zhang.zc.web;
 
+import com.zhang.zc.bean.AjaxMessage;
 import com.zhang.zc.bean.Permission;
 import com.zhang.zc.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -62,4 +64,59 @@ public class PermissionController {
         }*/
         return menu2;
     }
+
+    //跳转至菜单新增
+    @RequestMapping("/toAdd")
+    public String toAdd(){
+
+        return "permission/add";
+    }
+
+    //验证菜单名称
+
+    @RequestMapping("/checkPermissionName")
+    @ResponseBody
+    public Object checkPermissionName(String permissionname,Integer id){
+        AjaxMessage ajaxMessage = new AjaxMessage();
+
+        Permission permission=permissionService.selectPermissionById(id);
+        Boolean flag=permissionService.checkPermissionName(permissionname);
+        ajaxMessage.setData(permission);
+        if(flag){
+            ajaxMessage.setSuccess(true);
+        }else {
+            ajaxMessage.setSuccess(false);
+        }
+        return ajaxMessage;
+
+    }
+
+    //添加权限
+    @RequestMapping("/insert")
+    @ResponseBody
+    public Object insert(Permission permission){
+
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        try {
+            permissionService.insert(permission);
+
+            ajaxMessage.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ajaxMessage;
+
+    }
+
+    //跳转到修改菜单信息页面
+    @RequestMapping("/toEdit")
+    public String toEdit(Integer id,Model model){
+
+        Permission permission=permissionService.selectPermissionById(id);
+        model.addAttribute("permission",permission);
+        return "permission/edit";
+    }
+
+
 }

@@ -16,4 +16,11 @@ public interface PermissionService {
     //使用xml
     List<Permission> queryPermissionMenu1(Integer id);
 
+    //查询菜单名是否重复
+    Boolean checkPermissionName(String permissionname);
+
+    //添加菜单名称
+    void  insert(Permission permission);
+
+    Permission selectPermissionById(Integer id);
 }

@@ -18,6 +18,7 @@ public class Permission {
     private Integer pid;
     private String name;
     private String url;
+    private String icon;
     private Boolean open=true;
     private List<Permission> children=new ArrayList<Permission>();
 }

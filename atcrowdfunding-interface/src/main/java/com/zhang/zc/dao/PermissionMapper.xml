@@ -13,8 +13,20 @@
     </resultMap>
 
     <select id="queryPermissionMenu1" resultMap="per">
-        select id,name,pid from permission where pid=#{id};
+        select id,name,pid,icon,url from permission where pid=#{id};
 
     </select>
 
+    <select id="checkPermissionName" resultType="Integer">
+        select count(*) from permission where name=#{permissionname}
+    </select>
+
+    <insert id="insert">
+        insert into permission(name,url,pid) values (#{name},#{url},#{pid})
+    </insert>
+
+    <select id="selectPermissionById" resultType="permission">
+
+        select * from permission where id=#{id}
+    </select>
 </mapper>

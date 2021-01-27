@@ -16,4 +16,10 @@ public interface PermissionMapper {
     List<Permission> queryPermissionMenu();
 
     List<Permission> queryPermissionMenu1(Integer id);
+
+    int checkPermissionName(String permissionname);
+
+    void insert(Permission permission);
+
+    Permission selectPermissionById(Integer id);
 }

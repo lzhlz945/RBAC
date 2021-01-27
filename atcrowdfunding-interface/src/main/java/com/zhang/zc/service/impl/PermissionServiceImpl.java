@@ -29,4 +29,26 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> queryPermissionMenu1(Integer id) {
         return  permissionMapper. queryPermissionMenu1(id);
     }
+
+    @Override
+    public Boolean checkPermissionName(String permissionname) {
+       int count= permissionMapper.checkPermissionName(permissionname);
+       if(count <= 0){
+           return true;
+       }else {
+           return false;
+       }
+    }
+
+    @Override
+    public void insert(Permission permission) {
+       permissionMapper.insert(permission);
+
+
+    }
+
+    @Override
+    public Permission selectPermissionById(Integer id) {
+        return permissionMapper.selectPermissionById(id);
+    }
 }
