@@ -342,12 +342,13 @@
                     $(".pagination").html(html2);
 
                 }else {
-                    layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
+                    layer.msg("系统出错了，请稍后重试1", {time:2000, icon:5, shift:6}, function () {
                     });
                 }
             },
             error:function () {
-                layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
+                layer.close(loadingIndex);
+                layer.msg("系统出错了，请稍后重试2", {time:2000, icon:5, shift:6}, function () {
                 });
             }
 

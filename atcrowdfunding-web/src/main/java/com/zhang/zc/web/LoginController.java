@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: create by zhl
@@ -47,17 +44,29 @@ public class LoginController {
         User user1=userService.query4login(user);
         Map<Integer,Permission> map=new HashMap<>();
         List<Permission> permissions=permissionService.queryUserPermission(user1);
+        Set<String> userSet=new HashSet<>();
         for (Permission permission : permissions) {
+            if(permission.getPid()!=null || !"".equals(permission.getPid())){
+
             map.put(permission.getId(),permission);
+            }
+            if(permission.getUrl() != null || !"".equals(permission.getUrl())){
+
+            userSet.add(session.getServletContext().getContextPath()+permission.getUrl());
+            }
         }
+        session.setAttribute("userPermission",userSet);
         Permission rootPermissions= null;
         for (Permission permission : permissions) {
             Permission children=permission;
             if(children.getPid() == 0){
                 rootPermissions=permission;
             }else {
+                if(permission.getPid()!=null || !"".equals(permission.getPid())){
+
                 Permission parent=map.get(children.getPid());
                 parent.getChildren().add(children);
+                }
             }
         }
         session.setAttribute("permissionRoot",rootPermissions);
@@ -83,5 +92,13 @@ public class LoginController {
     public String loginOut(HttpSession session){
         session.invalidate();
         return "redirect:/toLogin";
+    }
+
+    @RequestMapping("/error")
+    public String error1(HttpSession session){
+       User user= (User)session.getAttribute("user");
+
+       session.setAttribute("message",user.getUsername());
+        return "user/error";
     }
 }

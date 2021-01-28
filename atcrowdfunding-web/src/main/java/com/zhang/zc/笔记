@@ -475,3 +475,45 @@
                   select id,name,pid from permission where pid=#{id};
 
               </select>
+
+
+
+十四路径问题：
+   假定你的web application 名称为news,你在浏览器中输入请求路径：
+
+   http://localhost:8080/news/main/list.jsp
+
+   则执行下面向行代码后打印出如下结果：
+
+   1、 System.out.println(request.getContextPath());
+
+   打印结果：/news
+     2、System.out.println(request.getServletPath());
+
+   打印结果：/main/list.jsp
+    3、 System.out.println(request.getRequestURI());
+
+   打印结果：/news/main/list.jsp
+    4、 System.out.println(request.getRealPath("/"));
+
+   打印结果： F:\Tomcat 6.0\webapps\news\test
+
+   截取参数
+   Map<String,String[]> parameterMap = httpServletRequest.getParameterMap();
+           StringBuilder builder=new StringBuilder("?");
+           for (String s : parameterMap.keySet()) {
+               builder.append(s);
+               builder.append("=");
+               builder.append(parameterMap.get(s)[0]);
+               builder.append("&");
+           }
+
+   把url 封装成map
+   map.put(url,0);
+
+   用servletPath来验证url
+
+   if(!map.contains(servletPath))&&(!map.contains(servletPath+builder))){
+   return false;
+     redirect
+   }

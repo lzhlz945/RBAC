@@ -88,7 +88,10 @@ public class PermissionController {
         }*/
        Map<Integer,Permission> map=new HashMap<Integer, Permission>();
         for (Permission permission : menu) {
+            if(permission.getPid()!=null || !"".equals(permission.getPid())){
+
             map.put(permission.getId(),permission);
+            }
         }
         for (Permission permission : menu) {
             if(ps.contains(permission.getId())){
@@ -102,8 +105,11 @@ public class PermissionController {
             if(children.getPid()==0){
                 permissions.add(permission);
             }else {
+                if(permission.getPid()!=null || !"".equals(permission.getPid())){
+
                 Permission parent=map.get(permission.getPid());
                 parent.getChildren().add(children);
+                }
             }
         }
 

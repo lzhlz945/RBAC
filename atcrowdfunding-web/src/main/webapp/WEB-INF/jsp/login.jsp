@@ -16,9 +16,9 @@
     <meta name="description" content="">
     <meta name="keys" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="${Path_APP}/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${Path_APP}/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${Path_APP}/css/login.css">
     <style>
 
     </style>
@@ -65,9 +65,9 @@
         <a class="btn btn-lg btn-success btn-block" onclick="dologin()" > 登录</a>
     </form>
 </div>
-<script src="jquery/jquery-2.1.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="layer/layer.js"></script>
+<script src="${Path_APP}/jquery/jquery-2.1.1.min.js"></script>
+<script src="${Path_APP}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${Path_APP}/layer/layer.js"></script>
 <script>
     $(function () {
        //如果顶层窗口不是当前窗口
@@ -121,8 +121,9 @@
             return;
         }
         var loadingIndex =null;
+        alert(123)
         $.ajax({
-            url:"doLogin",
+            url:"${Path_APP}/doLogin",
             data:{
                 "userAccount":userAccount,
                 "password":password
