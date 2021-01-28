@@ -1,6 +1,7 @@
 package com.zhang.zc.service.impl;
 
 import com.zhang.zc.bean.Permission;
+import com.zhang.zc.bean.User;
 import com.zhang.zc.dao.PermissionMapper;
 import com.zhang.zc.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +75,10 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> queryPermissionMenu2() {
 
         return permissionMapper.queryPermissionMenu2();
+    }
+
+    @Override
+    public List<Permission> queryUserPermission(User user1) {
+        return permissionMapper.queryUserPermission(user1);
     }
 }

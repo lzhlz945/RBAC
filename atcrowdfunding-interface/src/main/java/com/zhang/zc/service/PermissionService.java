@@ -1,6 +1,7 @@
 package com.zhang.zc.service;
 
 import com.zhang.zc.bean.Permission;
+import com.zhang.zc.bean.User;
 
 import java.util.List;
 
@@ -36,4 +37,6 @@ public interface PermissionService {
     List<Permission> queryPermissionMenu2();
 
 
+    //查询用户权限
+    List<Permission> queryUserPermission(User user1);
 }

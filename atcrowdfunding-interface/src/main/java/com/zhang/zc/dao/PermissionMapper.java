@@ -1,6 +1,7 @@
 package com.zhang.zc.dao;
 
 import com.zhang.zc.bean.Permission;
+import com.zhang.zc.bean.User;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface PermissionMapper {
     List<Integer> queryPermissionByPid(Integer rid);
 
     List<Permission> queryPermissionMenu2();
+
+    List<Permission> queryUserPermission(User user1);
 }
