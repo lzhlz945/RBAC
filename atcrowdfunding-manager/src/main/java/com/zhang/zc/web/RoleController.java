@@ -113,5 +113,32 @@ public class RoleController {
     }
 
 
+    //跳转至授权
+    @RequestMapping("/toPermission")
+    public String toPermission(Integer id){
+
+        //查询自己的权限
+        return "role/assignPermission";
+    }
+
+
+    //分配权限
+    @RequestMapping("/assignRolePermission1")
+    @ResponseBody
+    public Object assignRolePermission(Integer rid,Integer[] pids){
+        AjaxMessage ajaxMessage = new AjaxMessage();
+
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("rid",rid);
+        map.put("params",pids);
+        try {
+            roleService.assignPermission(map);
+            ajaxMessage.setSuccess(true);
+        } catch (Exception e) {
+            ajaxMessage.setSuccess(false);
+            e.printStackTrace();
+        }
+         return ajaxMessage;
+    }
 
 }

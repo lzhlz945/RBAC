@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 import java.util.HashMap;
 import java.util.List;
@@ -86,20 +87,23 @@ public class UserController {
 
     //跳转至单个修改
     @RequestMapping("/toEdit")
-    public String toEdit(String userId, Model model){
-        Integer integer = Integer.valueOf(userId);
-        User user=  userService.selectOne(integer);
-        model.addAttribute("user1",user);
+    public String toEdit(Integer userId, HttpSession session){
+
+        User user=  userService.selectOne(userId);
+        session.setAttribute("user1",user);
         return "user/edit";
     }
 
     //修改前检查账户
     @RequestMapping("/checkAccount")
     @ResponseBody
-    public Object checkAccount(String userAccount){
+    public Object checkAccount(String userAccount,Integer userId){
 
         AjaxMessage ajaxMessage = new AjaxMessage();
         Boolean flag=userService.toCheckAccount(userAccount);
+        User user=userService.selectOne(userId);
+        ajaxMessage.setData(user);
+
         if(flag){
             ajaxMessage.setSuccess(true);
         }else {

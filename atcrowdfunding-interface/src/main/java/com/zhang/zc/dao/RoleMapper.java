@@ -15,4 +15,8 @@ public interface RoleMapper {
     List<Role> pageQuery(Map<String, String> map);
 
     List<Role> selectRoleList(Integer id);
+
+    void deletePermissionByRid(Map<String, Object> map);
+
+    void assignPermission(Map<String, Object> map);
 }

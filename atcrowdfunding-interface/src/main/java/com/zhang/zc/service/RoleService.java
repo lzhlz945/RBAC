@@ -17,4 +17,7 @@ public interface RoleService {
 
     //查询role的所有记录
     List<Role> selectRoleList(Integer id);
+
+    //分配权限
+    void assignPermission(Map<String, Object> map);
 }

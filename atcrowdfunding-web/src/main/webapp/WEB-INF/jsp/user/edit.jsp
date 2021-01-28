@@ -74,7 +74,7 @@
                                 <a href="${Path_APP}/role/index"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
+                                <a href="${Path_APP}/permission/index"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
                             </li>
                         </ul>
                     </li>
@@ -136,11 +136,11 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="exampleInputPassword1">登陆账号</label>
-                            <input type="text" class="form-control" id="userAccount" value="${user1.userAccount}">
+                            <input type="text" class="form-control" id="userAccount" value="${sessionScope.user1.userAccount}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">用户名称</label>
-                            <input type="text" class="form-control" id="username" value="${user1.username}">
+                            <input type="text" class="form-control" id="username" value="${sessionScope.user1.username}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">邮箱地址</label>
@@ -210,34 +210,13 @@
                 });
                 return;
             }
-            var loadingIndex =null;
-            $.ajax({
-                url:"${Path_APP}/user/checkAccount",
-                data:{"userAccount":userAccount},
-                type:"get",
-                beforeSend:function () {
-                    loadingIndex = layer.msg('加载中...', {icon: 16});
-                },
-                success:function (data) {
-                    layer.close(loadingIndex);
-                    if(data.success){
-                        layer.msg("账户已可以使用", {time:2000, icon:1, shift:1}, function () {
-                        });
-                        $("#editBtn").attr("disabled",false);
 
-                    }else {
-                        layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
-                        });
-                        $("#editBtn").attr("disabled",true);
-                    }
-                },
-                error:function () {
-                    layer.close(loadingIndex);
-                    layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
-                    });
-                }
+            //验证
 
-            })
+
+                alert("验证")
+            checkName();
+
         })
       //修改按钮
       $("#editBtn").click(function () {
@@ -273,6 +252,48 @@
       })
 
     });
+
+    function checkName() {
+        var loadingIndex =null;
+        $.ajax({
+            url:"${Path_APP}/user/checkAccount",
+            data:{"userAccount":$("#userAccount").val(),
+                   "userId":"${user1.id}"
+            },
+            type:"get",
+            beforeSend:function () {
+                loadingIndex = layer.msg('加载中...', {icon: 16});
+            },
+            success:function (data) {
+                layer.close(loadingIndex);
+                if(data.success){
+
+                    layer.msg("账户可以使用", {time:2000, icon:1, shift:1}, function () {
+                    });
+                    $("#editBtn").attr("disabled",false);
+
+                }else {
+
+                    if(data.data.userAccount == $("#userAccount").val()){
+                        layer.msg("账户未变动", {time:2000, icon:1, shift:1}, function () {
+                        });
+                        $("#editBtn").attr("disabled",false);
+                    }else {
+
+                    layer.msg("账户已存在", {time:2000, icon:5, shift:6}, function () {
+                    });
+                    $("#editBtn").attr("disabled",true);
+                    }
+                }
+            },
+            error:function () {
+                layer.close(loadingIndex);
+                layer.msg("系统忙碌中...", {time:2000, icon:5, shift:6}, function () {
+                });
+            }
+
+        })
+    }
 </script>
 </body>
 </html>

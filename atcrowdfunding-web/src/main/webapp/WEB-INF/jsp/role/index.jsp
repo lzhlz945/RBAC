@@ -75,7 +75,7 @@
                                 <a href="${Path_APP}/role/index" style="color:red;"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
+                                <a href="${Path_APP}/permission/index"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
                             </li>
                         </ul>
                     </li>
@@ -242,7 +242,7 @@
                         html1+='<td><input type="checkbox" name="xz"></td>';
                         html1+='<td>'+n.name+'</td>';
                         html1+='<td>';
-                        html1+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
+                        html1+='<button type="button" onclick="toPermission('+n.id+')" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
                         html1+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
                         html1+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
                         html1+='</td>';
@@ -295,6 +295,11 @@
     $("tbody .btn-success").click(function(){
         window.location.href = "assignPermission.html";
     });
+
+    function toPermission(id) {
+
+        window.location.href="${Path_APP}/role/toPermission?id="+id;
+    }
 </script>
 </body>
 </html>

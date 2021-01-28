@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhang.zc.dao.PermissionMapper">
+
+
+    <resultMap id="per" type="com.zhang.zc.bean.Permission">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="pid" property="pid"/>
+       <collection property="children"
+                   select="queryPermissionMenu1" column="id"></collection>
+    </resultMap>
+
+    <select id="queryPermissionMenu1" resultMap="per">
+        select id,name,pid,icon,url from permission where pid=#{id};
+
+    </select>
+
+    <select id="checkPermissionName" resultType="Integer">
+        select count(*) from permission where name=#{permissionname}
+    </select>
+
+    <insert id="insert">
+        insert into permission(name,url,pid) values (#{name},#{url},#{pid})
+    </insert>
+
+    <select id="selectPermissionById" resultType="permission">
+
+        select * from permission where id=#{id}
+    </select>
+
+    <update id="edit">
+
+        update permission set name=#{name},url=#{url} where id=#{id}
+    </update>
+
+    <!--删除父节点-->
+    <delete id="deleteNode">
+        delete from permission where id=#{id}
+    </delete>
+    <!--删除子节点-->
+    <delete id="deleteChildrenNode">
+
+        delete from permission where pid=#{id}
+    </delete>
+
+    <select id="queryPermissionByPid" resultType="Integer">
+        select pid from prid where rid=#{rid}
+    </select>
+
+    <select id="queryPermissionMenu2" resultType="permission">
+        select * from permission
+    </select>
+
+
+    <select id="queryUserPermission" resultType="permission">
+        SELECT p.* FROM
+        permission p LEFT JOIN prid pr
+        on p.id=pr.pid
+        join urid ur
+        on pr.rid=ur.rid
+        WHERE ur.uId=#{id}
+
+    </select>
+</mapper>
