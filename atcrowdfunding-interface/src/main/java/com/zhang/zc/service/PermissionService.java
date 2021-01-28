@@ -28,4 +28,12 @@ public interface PermissionService {
     void edit(Permission permission);
 
     void deleteNode(Integer id);
+
+    //查询已经分配的权限
+    List<Integer> queryPermissionByPid(Integer rid);
+
+    //查询全部
+    List<Permission> queryPermissionMenu2();
+
+
 }

@@ -65,6 +65,50 @@ public class PermissionController {
         return menu2;
     }
 
+
+    @ResponseBody
+    @RequestMapping("/loadRoleData")
+    public Object loadRoleData(Integer rid){
+
+        List<Permission> permissions=new ArrayList<Permission>();
+//        List<Permission> menu=permissionService.queryPermissionMenu1(0);
+        List<Permission> menu=permissionService.queryPermissionMenu2();
+        List<Integer> ps=permissionService.queryPermissionByPid(rid);
+//        Map<Integer,Permission> map=new HashMap<Integer, Permission>();
+//        for (Permission menu1 : menu) {
+//            map.put(menu1.getId(),menu1);
+//        }
+       /* for (Permission permission : menu) {
+            if(ps.contains(permission.getId())){
+                permission.setChecked(true);
+
+            }else {
+                permission.setChecked(false);
+            }
+        }*/
+       Map<Integer,Permission> map=new HashMap<Integer, Permission>();
+        for (Permission permission : menu) {
+            map.put(permission.getId(),permission);
+        }
+        for (Permission permission : menu) {
+            if(ps.contains(permission.getId())){
+                permission.setChecked(true);
+            }else {
+                permission.setChecked(false);
+            }
+        }
+        for (Permission permission : menu) {
+            Permission children=permission;
+            if(children.getPid()==0){
+                permissions.add(permission);
+            }else {
+                Permission parent=map.get(permission.getPid());
+                parent.getChildren().add(children);
+            }
+        }
+
+        return permissions;
+    }
     //跳转至菜单新增
     @RequestMapping("/toAdd")
     public String toAdd(){

@@ -19,6 +19,7 @@ public class Permission {
     private String name;
     private String url;
     private String icon;
+    private Boolean checked=false;
     private Boolean open=true;
     private List<Permission> children=new ArrayList<Permission>();
 }

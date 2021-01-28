@@ -188,7 +188,7 @@
             },
             async: {
                 enable: true,
-                url: "${Path_APP}/permission/loadData",
+                url: "${Path_APP}/permission/loadRoleData?rid=${param.id}",
                 autoParam: ["id", "name"]
             },
             view: {

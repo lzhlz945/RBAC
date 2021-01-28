@@ -28,4 +28,9 @@ public interface PermissionMapper {
     void deleteNode(Integer id);
 
     void deleteChildrenNode(Integer id);
+
+
+    List<Integer> queryPermissionByPid(Integer rid);
+
+    List<Permission> queryPermissionMenu2();
 }

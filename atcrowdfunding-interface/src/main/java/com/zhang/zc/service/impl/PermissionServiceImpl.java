@@ -63,4 +63,16 @@ public class PermissionServiceImpl implements PermissionService {
         permissionMapper.deleteChildrenNode(id);
 //        System.out.println(10/0);
     }
+
+    @Override
+    public List<Integer> queryPermissionByPid(Integer rid) {
+
+        return permissionMapper.queryPermissionByPid(rid);
+    }
+
+    @Override
+    public List<Permission> queryPermissionMenu2() {
+
+        return permissionMapper.queryPermissionMenu2();
+    }
 }

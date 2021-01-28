@@ -45,4 +45,12 @@
         delete from permission where pid=#{id}
     </delete>
 
+    <select id="queryPermissionByPid" resultType="Integer">
+        select pid from prid where rid=#{rid}
+    </select>
+
+    <select id="queryPermissionMenu2" resultType="permission">
+        select * from permission
+    </select>
+
 </mapper>
