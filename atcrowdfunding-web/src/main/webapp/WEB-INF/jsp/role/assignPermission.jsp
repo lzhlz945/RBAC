@@ -1,9 +1,9 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="GB18030">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="${Path_APP}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${Path_APP}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${Path_APP}/css/main.css">
+    <link rel="stylesheet" href="${Path_APP}/css/doc.min.css">
+    <link rel="stylesheet" href="${Path_APP}/ztree/zTreeStyle.css">
     <style>
         .tree li {
             list-style-type: none;
             cursor:pointer;
         }
-        table tbody tr:nth-child(odd){background:#F4F4F4;}
-        table tbody td:nth-child(even){color:#C00;}
     </style>
 </head>
 
@@ -75,7 +75,7 @@
                                 <a href="${Path_APP}/role/index" style="color:red;"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="${Path_APP}/permission/index"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
+                                <a href="${Path_APP}/permission/index" ><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
                             </li>
                         </ul>
                     </li>
@@ -126,65 +126,48 @@
             </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
-                </div>
+                <div class="panel-heading"><i class="glyphicon glyphicon-th-list"></i> 权限分配列表<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <div class="input-group-addon">查询条件</div>
-                                <input class="form-control has-success" id="textInput1" type="text" placeholder="请输入查询条件">
-                            </div>
-                        </div>
-                        <button type="button" id="chaxun" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
-                    </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <ul id="treeDemo" class="ztree"></ul>
                     <br>
-                    <hr style="clear:both;">
-                    <div class="table-responsive">
-                        <table class="table  table-bordered">
-                            <thead>
-                            <tr >
-                                <th width="30">#</th>
-                                <th width="30"><input type="checkbox" id="qx"></th>
-                                <th>名称</th>
-                                <th width="100">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tbody1">
-
-
-                            </tbody>
-                            <tfoot>
-                            <tr >
-                                <td colspan="6" align="center">
-                                    <ul class="pagination">
-                                        <%--<li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>--%>
-                                    </ul>
-                                </td>
-                            </tr>
-
-                            </tfoot>
-                        </table>
-                    </div>
+                    <button id="fpxk" class="btn btn-primary btn-sm glyphicon glyphicon-user">分配许可</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">帮助</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bs-callout bs-callout-info">
+                    <h4>没有默认类</h4>
+                    <p>警告框没有默认类，只有基类和修饰类。默认的灰色警告框并没有多少意义。所以您要使用一种有意义的警告类。目前提供了成功、消息、警告或危险。</p>
+                </div>
+                <div class="bs-callout bs-callout-info">
+                    <h4>没有默认类</h4>
+                    <p>警告框没有默认类，只有基类和修饰类。默认的灰色警告框并没有多少意义。所以您要使用一种有意义的警告类。目前提供了成功、消息、警告或危险。</p>
+                </div>
+            </div>
+            <!--
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
 <script src="${Path_APP}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${Path_APP}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${Path_APP}/script/docs.min.js"></script>
+<script src="${Path_APP}/ztree/jquery.ztree.all-3.5.min.js"></script>
 <script src="${Path_APP}/layer/layer.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -199,108 +182,69 @@
             }
         });
 
-        //全选
-        $("#qx").click(function () {
-            $("input[name=xz]").prop("checked",this.checked);
-        })
-
-        //反选
-        $("#tbody1").on("click",$("input[name=xz]"),function () {
-            $("#qx").prop("checked",$("input[name=xz]").length==$("input[name=xz]:checked").length)
-        })
-
-        rolePages(1);
-        $("#chaxun").click(function () {
-            rolePages(1)
-        })
-    });
-
-    //分页展示
-    function rolePages(pageNum){
-        var loadingIndex=null;
-        $.ajax({
-            url:"${Path_APP}/role/pages",
-            type:"POST",
-            dataType:"json",
-            data:{
-                "pageNum":pageNum,
-                "pageSize":4,
-                "name":$.trim($("#textInput1").val())
+        var setting = {
+            check:{
+              enable: true
             },
-            beforeSend:function () {
-                loadingIndex = layer.msg('加载中...', {icon: 16});
+            async: {
+                enable: true,
+                url: "${Path_APP}/permission/loadData",
+                autoParam: ["id", "name"]
             },
-            success:function (result) {
-                layer.close(loadingIndex);
-                if(result.success){
-                    var html1="";
-                    var html2="";
-                    $.each(result.data.list,function (i,n) {
-
-                        html1+='<tr>';
-                        html1+='<td>'+i+'</td>';
-                        html1+='<td><input type="checkbox" name="xz"></td>';
-                        html1+='<td>'+n.name+'</td>';
-                        html1+='<td>';
-                        html1+='<button type="button" onclick="toPermission('+n.id+')" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
-                        html1+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
-                        html1+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
-                        html1+='</td>';
-                        html1+='</tr>';
-
-                    });
-                    if(pageNum >1){
-                        layer.close(loadingIndex);
-                        html2+='<li ><a href="#" onclick="rolePages('+1+')">首页</a></li>';
-                        html2+='<li ><a href="#" onclick="rolePages('+(pageNum-1)+')">上一页</a></li>';
+            view: {
+                selectedMulti: false,
+                addDiyDom: function(treeId, treeNode){
+                    var icoObj = $("#" + treeNode.tId + "_ico"); // tId = permissionTree_1, $("#permissionTree_1_ico")
+                    if ( treeNode.icon ) {
+                        icoObj.removeClass("button ico_docu ico_open").addClass(treeNode.icon).css("background","");
                     }
 
-                    var len=result.data.navigatepageNums.length;
-                    for(var j = 0; j < len; j++) {
-
-                        if(result.data.navigatepageNums[j]==pageNum){
-                            html2+='<li class="active"><a href="#" onclick="rolePages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
-                        }else {
-                            html2+='<li ><a href="#" onclick="rolePages('+result.data.navigatepageNums[j]+')">'+result.data.navigatepageNums[j]+'</a></li>';
-                        }
-
-                    }
-
-                    if(pageNum != result.data.pages){
-                        layer.close(loadingIndex);
-                        html2+='<li ><a href="#" onclick="rolePages('+(pageNum+1)+')">下一页</a></li>';
-                        html2+='<li ><a href="#" onclick="rolePages('+result.data.pages+')">尾页</a></li>';
-                    }
-
-                    $("#tbody1").html(html1);
-                    $(".pagination").html(html2);
-
-                }else {
-                    layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
-                    });
                 }
-            },
-            error:function () {
-                layer.msg("系统出错了，请稍后重试", {time:2000, icon:5, shift:6}, function () {
-                });
             }
 
+        };
+
+
+
+
+        $.fn.zTree.init($("#treeDemo"), setting);
+
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        $("#fpxk").click(function () {
+
+        var nodes = treeObj.getCheckedNodes(true);
+        if(nodes.length==0){
+            layer.msg("请选择", {time:2000, icon:5, shift:6}, function () {
+            });
+        }else {
+            var params="rid=${param.id}";
+            $.each(nodes,function (i,n) {
+                params+="&pids="+n.id;
+
+            })
+            alert(params)
+            $.ajax({
+                url:"${Path_APP}/role/assignRolePermission1",
+                data:params,
+                type:"post",
+                success:function (result) {
+                    if(result){
+                        layer.msg("分配成功", {time:2000, icon:1, shift:1}, function () {
+                        });
+                        $("#updateBtn").attr("disabled",false);
+                    }else {
+                        layer.msg("分配失败", {time:2000, icon:1, shift:1}, function () {
+                        });
+                        $("#updateBtn").attr("disabled",false);
+                    }
+                }
+            })
+
+        }
         })
-
-
-
-
-    }
-
-    $("tbody .btn-success").click(function(){
-        window.location.href = "assignPermission.html";
     });
 
-    function toPermission(id) {
 
-        window.location.href="${Path_APP}/role/toPermission?id="+id;
-    }
 </script>
 </body>
 </html>
-

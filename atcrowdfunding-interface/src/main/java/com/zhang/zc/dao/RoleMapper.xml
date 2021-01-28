@@ -27,4 +27,24 @@
          where u.id =#{id}
         )
     </select>
+
+    <!--
+    权限分配
+    void deletePermissionByRid(Map<String, Object> map);
+    void assignPermission(Map<String, Object> map);
+    -->
+
+    <delete id="deletePermissionByRid">
+        delete from prid where rid=#{rid}
+    </delete>
+
+    <insert id="assignPermission">
+        insert into prid(rid,pid) values
+        <foreach collection="params" separator="," item="param">
+            (
+            #{rid},
+            #{param}
+            )
+        </foreach>
+    </insert>
 </mapper>

@@ -133,6 +133,7 @@
                     <ul id="treeDemo" class="ztree"></ul>
                     <br>
                     <button class="btn btn-primary btn-sm glyphicon glyphicon-user">分配许可</button>
+                    <a href="javascript:;" >点此无反应javascript:</a>
                 </div>
             </div>
         </div>
@@ -201,7 +202,7 @@
 
                     //   <a><span></span></a>
                     var aObj = $("#" + treeNode.tId + "_a"); // tId = permissionTree_1, ==> $("#permissionTree_1_a")
-                    // aObj.attr("href", "javascript:;");
+                    aObj.attr("href", "javascript:;");
                     if (treeNode.editNameFlag || $("#btnGroup"+treeNode.tId).length>0) return;
                     var s = '<span id="btnGroup'+treeNode.tId+'">';
                     if ( treeNode.level == 0 ) {
@@ -295,7 +296,9 @@
 
     //删除节点
     function deleteNode(id) {
-
+// 刷新数据
+//         var treeObj = $.fn.zTree.getZTreeObj("permissionTree");
+//         treeObj.reAsyncChildNodes(null, "refresh");  强行异步加载父节点的子节点。
         layer.confirm("确定删除本节点吗?",  {icon: 3, title:'提示'}, function(cindex){
         window.location.href="${Path_APP}/permission/delete?id="+id;
             layer.close(cindex);

@@ -76,21 +76,7 @@
             window.top.location=window.location;
         }
         $(window).keydown(function (e) {
-            var userAccount=$("#userAccount").val();
-            var password=$("#password").val();
 
-            if(userAccount == ""){
-                layer.msg("账号不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
-
-                });
-                return;
-            }
-            if(password == ""){
-                layer.msg("密码不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
-
-                });
-                return;
-            }
             if(e.keyCode==13){
                 login(userAccount,password);
             }
@@ -119,6 +105,21 @@
     }
 
     function login(userAccount,password) {
+        var userAccount=$("#userAccount").val();
+        var password=$("#password").val();
+
+        if(userAccount == ""){
+            layer.msg("账号不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+
+            });
+            return;
+        }
+        if(password == ""){
+            layer.msg("密码不能为空，请输入", {time:2000, icon:5, shift:6}, function () {
+
+            });
+            return;
+        }
         var loadingIndex =null;
         $.ajax({
             url:"doLogin",

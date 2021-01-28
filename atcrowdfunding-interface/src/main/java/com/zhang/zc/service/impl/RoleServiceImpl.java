@@ -33,4 +33,12 @@ public class RoleServiceImpl implements RoleService {
 
         return roleMapper.selectRoleList(id);
     }
+
+    @Override
+    public void assignPermission(Map<String, Object> map) {
+        //删除权限
+        roleMapper.deletePermissionByRid(map);
+        //添加权限
+        roleMapper.assignPermission(map);
+    }
 }
