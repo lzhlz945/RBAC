@@ -1,0 +1,12 @@
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (129, 'Tom', 'tom@atguigu.com', '1', 22, 1, -1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (130, 'Jerry', 'jerry@atguigu.com', '0', 25, 1, -1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (131, 'Black', 'black@atguigu.com', '1', 30, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (132, 'White', 'white@atguigu.com', '0', 35, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (133, 'Tom', 'tom@atguigu.com', '1', 22, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (134, 'Jerry', 'jerry@atguigu.com', '0', 25, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (135, 'Black', 'black@atguigu.com', '1', 30, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (136, 'White', 'white@atguigu.com', '0', 35, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (137, 'Tom', 'tom@atguigu.com', '1', 22, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (138, 'Jerry', 'jerry@atguigu.com', '0', 25, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (139, 'Black', 'black@atguigu.com', '1', 30, 1, 1);
+INSERT INTO `tbl_employee`(`id`, `last_name`, `email`, `gender`, `age`, `version`, `logic_filed`) VALUES (140, 'White', 'white@atguigu.com', '0', 35, 1, 1);

@@ -1,0 +1,10 @@
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (1, '系统菜单', 0, '', 'glyphicon glyphicon-home');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (2, '控制面板', 1, NULL, 'glyphicon glyphicon-folder-close');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (3, '权限管理', 1, NULL, 'glyphicon glyphicon-indent-left');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (4, '业务审核', 1, NULL, 'glyphicon glyphicon-ok');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (5, '用户维护', 3, '/user/index', 'glyphicon glyphicon-user');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (6, '角色维护', 3, '/role/index', 'glyphicon glyphicon-pawn');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (7, '许可维护', 3, '/permission/index', 'glyphicon glyphicon-lock');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (8, '实名认证审核', 4, NULL, 'glyphicon glyphicon-check');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (9, '广告审核', 4, NULL, 'glyphicon glyphicon-check');
+INSERT INTO `permission`(`id`, `name`, `pid`, `url`, `icon`) VALUES (10, '项目审核', 4, NULL, 'glyphicon glyphicon-check');
